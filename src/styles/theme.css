@@ -1,17 +1,20 @@
 :root {
-  --bg: #f4eef4;
+  --bg: #f162f1;
   --panel: #f6e9f0;
   --ink: #2a1a1f;
   --primary: #ff2d92;
   --primary-strong: #f43ca0;
   --tile-bg: #fff0f6;
+  --muted: #d0c4cb;
   --outline: #2a1a1f;
-  --shadow: 0 4px 0 var(--ink);
-  --shadow-strong: 0 6px 0 var(--ink);
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-strong: 6px 6px 0 var(--ink);
   --r-sm: 12px;
   --r-md: 16px;
   --r-lg: 24px;
   --space: 12px;
+  --space-sm: 8px;
+  --space-lg: 16px;
 }
 
 /* Transitions & motion */
@@ -20,12 +23,84 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .u-transition { transition: none; }
-  * { animation: none !important; }
+  .u-transition {
+    transition: none;
+  }
+
+  * {
+    animation: none !important;
+  }
 }
 
+/* Utilities: radius */
+.u-r-sm {
+  border-radius: var(--r-sm);
+}
+
+.u-r-md {
+  border-radius: var(--r-md);
+}
+
+.u-r-lg {
+  border-radius: var(--r-lg);
+}
+
+/* Utilities: shadows */
+.u-shadow-1 {
+  box-shadow: var(--shadow);
+}
+
+.u-shadow-2 {
+  box-shadow: var(--shadow-strong);
+}
+
+/* Utilities: colors */
+.u-bg-panel {
+  background: var(--panel);
+}
+
+.u-bg-tile {
+  background: var(--tile-bg);
+}
+
+.u-ink {
+  color: var(--ink);
+}
+
+.u-primary-bg {
+  background: var(--primary);
+}
+
+.u-primary {
+  color: var(--primary);
+}
+
+/* Utilities: layout spacing */
+.u-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.u-gap-sm {
+  gap: var(--space-sm);
+}
+
+.u-gap {
+  gap: var(--space);
+}
+
+.u-gap-lg {
+  gap: var(--space-lg);
+}

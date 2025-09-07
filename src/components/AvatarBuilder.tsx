@@ -60,9 +60,35 @@ export default function AvatarBuilder() {
 
   const onSave = () => {
     const s = buildAvatarString(cfg);
-    // eslint-disable-next-line no-console
-    console.log("Saved avatar:", { string: s, config: cfg });
-    alert("Saved!\n" + s);
+    // Build a ready-to-paste variable snippet
+    const snippet = `const AVATAR_STRING = "${s}";`;
+    // Expose on window for quick access during the session
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).AVATAR_STRING = s;
+    } catch {}
+    // Persist a copy (optional), and copy to clipboard
+    try {
+      localStorage.setItem('AVATAR_STRING', s);
+    } catch {}
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(snippet).then(
+        () => {
+          // eslint-disable-next-line no-console
+          console.log('Saved & copied to clipboard:', snippet);
+          alert('Saved and copied to clipboard!\n' + snippet);
+        },
+        () => {
+          // eslint-disable-next-line no-console
+          console.log('Saved (clipboard unavailable):', snippet);
+          alert('Saved! (Could not copy automatically)\n' + snippet);
+        }
+      );
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('Saved (no clipboard API):', snippet);
+      alert('Saved! (Clipboard API unavailable)\n' + snippet);
+    }
   };
 
   // Helpers to set/toggle numeric options

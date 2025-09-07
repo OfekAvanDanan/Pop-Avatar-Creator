@@ -323,7 +323,7 @@ export function Avatar(props: Props) {
   const cls = ['avatar', className].filter(Boolean).join(' ');
 
   const par = cover ? 'xMidYMid slice' : 'xMidYMid meet';
-  const BLEED = 1; // add small bleed to avoid subpixel gaps
+  const BLEED = 1; // small bleed to avoid subpixel gaps
   const imgX = -BLEED / 2;
   const imgY = -BLEED / 2;
   const imgW = VIEWBOX.w + BLEED;

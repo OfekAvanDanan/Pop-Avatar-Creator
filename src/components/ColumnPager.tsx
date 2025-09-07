@@ -28,7 +28,8 @@ export default function ColumnPager({ children, columnsVisible = 3, gap = 12, cl
     return rect.width + gap; // approximate including gap between columns
   }, [gap]);
 
-  const pages = Math.max(1, columns.length - columnsVisible + 1);
+  // One dot per visible window (3 columns => 6 items)
+  const pageCount = Math.ceil(columns.length / columnsVisible);
 
   // Update active page on scroll
   React.useEffect(() => {
@@ -36,12 +37,20 @@ export default function ColumnPager({ children, columnsVisible = 3, gap = 12, cl
     if (!track) return;
     const onScroll = () => {
       const step = colFullWidth() || 1;
-      const idx = Math.round(track.scrollLeft / step);
-      setPage(Math.min(Math.max(idx, 0), pages - 1));
+      // Determine the current column index, then map to page by window size
+      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+      // If we're effectively at the end, force last dot active
+      if (track.scrollLeft >= maxScroll - 2) {
+        setPage(Math.max(0, pageCount - 1));
+        return;
+      }
+      const colIdx = Math.round(track.scrollLeft / step);
+      const idx = Math.min(Math.max(Math.floor(colIdx / columnsVisible), 0), Math.max(0, pageCount - 1));
+      setPage(idx);
     };
     track.addEventListener('scroll', onScroll, { passive: true });
     return () => track.removeEventListener('scroll', onScroll);
-  }, [colFullWidth, pages]);
+  }, [colFullWidth, columnsVisible, pageCount]);
 
   // Wheel handler to move exactly one column per gesture
   const wheelAccum = React.useRef(0);
@@ -64,7 +73,8 @@ export default function ColumnPager({ children, columnsVisible = 3, gap = 12, cl
     const track = trackRef.current;
     if (!track) return;
     const step = colFullWidth() || 1;
-    track.scrollTo({ left: idx * step, behavior: 'smooth' });
+    const startCol = Math.min(idx * columnsVisible, Math.max(0, columns.length - columnsVisible));
+    track.scrollTo({ left: startCol * step, behavior: 'smooth' });
   };
 
   return (
@@ -80,16 +90,18 @@ export default function ColumnPager({ children, columnsVisible = 3, gap = 12, cl
           </div>
         ))}
       </div>
-      <div className="cpager-dots">
-        {Array.from({ length: pages }).map((_, i) => (
-          <button
-            key={i}
-            className={"cpager-dot" + (i === page ? " active" : "")}
-            onClick={() => goPage(i)}
-            aria-label={`Go to page ${i + 1}`}
-          />
-        ))}
-      </div>
+      {pageCount > 1 && (
+        <div className="cpager-dots">
+          {Array.from({ length: pageCount }).map((_, i) => (
+            <button
+              key={i}
+              className={"cpager-dot" + (i === page ? " active" : "")}
+              onClick={() => goPage(i)}
+              aria-label={`Go to page ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
