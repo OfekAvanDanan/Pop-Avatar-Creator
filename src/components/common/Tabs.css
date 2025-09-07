@@ -1,5 +1,37 @@
-.builder-tabs { display: flex; gap: 10px; margin-bottom: 8px; }
-.tab { background: transparent; border: none; font-weight: 700; font-size: 14px; padding: 6px 10px; border-radius: var(--r-md); border: 2px solid transparent; cursor: pointer; color: var(--ink); box-shadow: none; outline: none; position: relative; top: 0; transition: background-color 120ms ease, color 120ms ease, transform 120ms ease; }
-.tab.active { background: var(--primary); color: #fff; transform: translateY(-1px); }
-.tab:hover { transform: translateY(-1px); }
-.tab:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.builder-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 8px;
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: var(--r-md);
+    border: 2px solid transparent;
+    cursor: pointer;
+    color: var(--ink);
+    box-shadow: none;
+    outline: none;
+    position: relative;
+    top: 0;
+    transition: background-color 120ms ease, color 120ms ease, transform 120ms ease;
+}
+
+.tab.active {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.tab:hover {
+    transform: translateY(-1px);
+}
+
+.tab:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}

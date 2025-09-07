@@ -2,11 +2,14 @@
   display: flex;
   flex-direction: column;
   width: 420px;
+  height: 900px;
   margin: 0 auto;
   background: var(--panel);
+  border: 2px solid var(--outline);
   border-radius: var(--r-md);
   overflow: hidden;
   box-shadow: var(--shadow-strong);
+
 }
 
 .builder-hero {
@@ -52,76 +55,28 @@
   margin-bottom: 12px;
 }
 
-.builder-tabs {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
-}
 
-.tab {
-  background: transparent;
-  border: none;
-  font-weight: 700;
-  padding: 8px 12px;
-  border-radius: var(--r-md);
-  border: 2px solid transparent;
-  cursor: pointer;
-  color: var(--ink);
-  box-shadow: none;
-  outline: none;
-  position: relative;
-  top: 0;
-  transition: background-color 120ms ease, color 120ms ease, transform 120ms ease;
-}
 
-.tab.active {
-  background: var(--primary);
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-.tab:hover {
-  transform: translateY(-1px);
-}
-
-.tab:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+.container-tilesnswatches {
+  height: 320px;
+  overflow-y: none;
+  scrollbar-width: none;
 }
 
 .swatch-row {
   display: flex;
-  gap: 10px;
+  align-content: center;
+  justify-content: center;
+  gap: 15px;
   margin-bottom: 12px;
+  animation: fade-in 160ms ease;
 }
 
-.swatch {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid var(--outline);
-  box-shadow: 0 3px 0 var(--ink);
-  transition: transform 120ms ease;
-}
-
-.swatch.selected {
-  outline: 3px solid var(--primary);
-}
-
-.swatch:hover {
-  transform: translateY(-1px);
-}
-
-.swatch:focus-visible {
-  outline: 3px solid var(--primary-strong);
-  outline-offset: 2px;
-}
 
 .tiles-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-
 }
 
 /* Horizontal scroller for selections */
@@ -153,43 +108,7 @@
   animation: fade-in 180ms ease;
 }
 
-.tile {
-  background: var(--tile-bg);
-  border-radius: var(--r-md);
-  border: 2px solid var(--outline);
-  box-shadow: var(--shadow);
-  padding: 0;
-  overflow: visible;
-  aspect-ratio: 1 / 1;
-  position: relative;
-  top: 0;
-  transform: translateZ(0);
-  transition: transform 120ms ease, box-shadow 120ms ease;
-}
 
-.tile.selected {
-  outline: 3px solid;
-  box-shadow: 0 6px 0 var(--ink);
-  transform: translateY(-1px);
-}
-
-.tile:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 var(--ink);
-}
-
-.tile:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow);
-}
-
-.tile svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  animation: fade-in 160ms ease;
-
-}
 
 /* Column pager (3 columns x 2 rows, step = 1 column) */
 /* Column pager styles are centralized in ColumnPager.css */

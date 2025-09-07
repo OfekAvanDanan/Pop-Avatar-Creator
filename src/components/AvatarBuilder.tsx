@@ -117,184 +117,168 @@ export default function AvatarBuilder() {
           activeKey={tab}
           onChange={(k) => setTab(k as Tab)}
         />
-
-        {tab === "Face" && (
-          <div>
-            <div className="swatch-row">
-              {SKIN_COLORS.map((c) => (
-                <Swatch
-                  key={c}
-                  color={c}
-                  selected={cfg.skinColor?.toLowerCase() === c.toLowerCase()}
-                  onClick={() => setCfg((x) => ({ ...x, skinColor: c }))}
-                />
-              ))}
-            </div>
-            <ColumnPager>
-              {faceOptions.map((n) => (
-                <Tile
-                  key={`face-${n}`}
-                  selected={cfg.faceType === n}
-                  onClick={() => setCfg((x) => ({ ...x, faceType: n }))}
-                >
-                  <Avatar
-                    key={`face-${n}-${cfg.skinColor}-${cfg.bodyColor}-${cfg.hairColor}-${cfg.bgColor}-${cfg.glasses}-${cfg.faceTexture}-${cfg.centerClothing}-${cfg.rightClothing}-${cfg.leftClothing}`}
-                    config={{ ...cfg, faceType: n }}
-                    width="100%"
-                    height="100%"
+        <div className="container-tilesnswatches">
+          {tab === "Face" && (
+            <div>
+              <div className="swatch-row">
+                {SKIN_COLORS.map((c) => (
+                  <Swatch
+                    key={c}
+                    color={c}
+                    selected={cfg.skinColor?.toLowerCase() === c.toLowerCase()}
+                    onClick={() => setCfg((x) => ({ ...x, skinColor: c }))}
                   />
-                </Tile>
-              ))}
-            </ColumnPager>
-          </div>
-        )}
-
-        {tab === "Hair" && (
-          <div>
-            <div className="swatch-row">
-              {HAIR_COLORS.map((c) => (
-                <Swatch
-                  key={c}
-                  color={c}
-                  selected={cfg.hairColor?.toLowerCase() === c.toLowerCase()}
-                  onClick={() => setCfg((x) => ({ ...x, hairColor: c }))}
-                />
-              ))}
+                ))}
+              </div>
+              <ColumnPager>
+                {faceOptions.map((n) => (
+                  <Tile
+                    key={`face-${n}`}
+                    selected={cfg.faceType === n}
+                    onClick={() => setCfg((x) => ({ ...x, faceType: n }))}
+                  >
+                    <Avatar config={{ ...cfg, faceType: n }} width="100%" height="100%" />
+                  </Tile>
+                ))}
+              </ColumnPager>
             </div>
-            {(() => {
-              const group0 = hairOptions.filter((n) => n < 100);
-              const group1 = hairOptions.filter((n) => n >= 100);
-              const zipped: number[] = [];
-              const m = Math.max(group0.length, group1.length);
-              for (let i = 0; i < m; i++) {
-                if (i < group0.length) zipped.push(group0[i]); // first row (0xx)
-                if (i < group1.length) zipped.push(group1[i]); // second row (1xx)
-              }
-              return (
-                <ColumnPager>
-                  {zipped.map((n) => (
-                    <Tile key={`hair-${n}`} selected={cfg.hairType === n} onClick={() => toggleNumeric("hairType", n)}>
-                      <Avatar
-                        key={`hair-${n}-${cfg.skinColor}-${cfg.bodyColor}-${cfg.hairColor}-${cfg.bgColor}-${cfg.glasses}-${cfg.faceTexture}-${cfg.centerClothing}-${cfg.rightClothing}-${cfg.leftClothing}`}
-                        config={{ ...cfg, hairType: n }}
-                        width="100%"
-                        height="100%"
-                      />
+          )}
+
+          {tab === "Hair" && (
+            <div>
+              <div className="swatch-row">
+                {HAIR_COLORS.map((c) => (
+                  <Swatch
+                    key={c}
+                    color={c}
+                    selected={cfg.hairColor?.toLowerCase() === c.toLowerCase()}
+                    onClick={() => setCfg((x) => ({ ...x, hairColor: c }))}
+                  />
+                ))}
+              </div>
+              {(() => {
+                const group0 = hairOptions.filter((n) => n < 100);
+                const group1 = hairOptions.filter((n) => n >= 100);
+                const zipped: number[] = [];
+                const m = Math.max(group0.length, group1.length);
+                for (let i = 0; i < m; i++) {
+                  if (i < group0.length) zipped.push(group0[i]); // first row (0xx)
+                  if (i < group1.length) zipped.push(group1[i]); // second row (1xx)
+                }
+                return (
+                  <ColumnPager>
+                    {zipped.map((n) => (
+                      <Tile
+                        key={`hair-${n}`}
+                        selected={cfg.hairType === n}
+                        onClick={() => toggleNumeric("hairType", n)}
+                      >
+                        <Avatar config={{ ...cfg, hairType: n }} width="100%" height="100%" />
+                      </Tile>
+                    ))}
+                    {/* None / Bald option moved to end */}
+                    <Tile key="hair-0" selected={!cfg.hairType} onClick={() => setNumeric("hairType", 0)}>
+                      <Avatar config={{ ...cfg, hairType: 0 }} width="100%" height="100%" />
                     </Tile>
-                  ))}
-                  {/* None / Bald option moved to end */}
-                  <Tile key="hair-0" selected={!cfg.hairType} onClick={() => setNumeric("hairType", 0)}>
+                  </ColumnPager>
+                );
+              })()}
+            </div>
+          )}
+
+          {tab === "Clothing" && (
+            <div>
+              <div className="swatch-row">
+                {CLOTH_COLORS.map((c) => (
+                  <Swatch
+                    key={c}
+                    color={c}
+                    selected={cfg.bodyColor?.toLowerCase() === c.toLowerCase()}
+                    onClick={() => setCfg((x) => ({ ...x, bodyColor: c }))}
+                  />
+                ))}
+              </div>
+              <ColumnPager>
+                {clothingOptions.map((n) => (
+                  <Tile
+                    key={`cloth-${n}`}
+                    selected={cfg.clothingType === n}
+                    onClick={() => setCfg((x) => ({ ...x, clothingType: n }))}
+                  >
                     <Avatar
-                      key={`hair-0-${cfg.skinColor}-${cfg.bodyColor}-${cfg.hairColor}-${cfg.bgColor}-${cfg.glasses}-${cfg.faceTexture}-${cfg.centerClothing}-${cfg.rightClothing}-${cfg.leftClothing}`}
-                      config={{ ...cfg, hairType: 0 }}
+                      key={`cloth-${n}-${cfg.skinColor}-${cfg.bodyColor}-${cfg.hairColor}-${cfg.bgColor}-${cfg.glasses}-${cfg.faceTexture}-${cfg.centerClothing}-${cfg.rightClothing}-${cfg.leftClothing}`}
+                      config={{ ...cfg, clothingType: n }}
                       width="100%"
                       height="100%"
                     />
                   </Tile>
-                </ColumnPager>
-              );
-            })()}
-          </div>
-        )}
-
-        {tab === "Clothing" && (
-          <div>
-            <div className="swatch-row">
-              {CLOTH_COLORS.map((c) => (
-                <Swatch
-                  key={c}
-                  color={c}
-                  selected={cfg.bodyColor?.toLowerCase() === c.toLowerCase()}
-                  onClick={() => setCfg((x) => ({ ...x, bodyColor: c }))}
-                />
-              ))}
+                ))}
+              </ColumnPager>
             </div>
+          )}
+
+          {tab === "Details" && (
             <ColumnPager>
-              {clothingOptions.map((n) => (
+              {[
+                ...faceTextureOptions.map((n) => ({ type: "faceTexture" as const, n })),
+                ...glassesOptions.map((n) => ({ type: "glasses" as const, n })),
+                ...centerClothingOptions.map((n) => ({ type: "centerClothing" as const, n })),
+                ...rightClothingOptions.map((n) => ({ type: "rightClothing" as const, n })),
+                ...leftClothingOptions.map((n) => ({ type: "leftClothing" as const, n })),
+              ].map((it) => {
+                const selected =
+                  (it.type === "faceTexture" && cfg.faceTexture === it.n) ||
+                  (it.type === "glasses" && cfg.glasses === it.n) ||
+                  (it.type === "centerClothing" && cfg.centerClothing === it.n) ||
+                  (it.type === "rightClothing" && cfg.rightClothing === it.n) ||
+                  (it.type === "leftClothing" && cfg.leftClothing === it.n);
+
+                const onClick = () => {
+                  if (it.type === "faceTexture") toggleNumeric("faceTexture", it.n);
+                  if (it.type === "glasses") toggleNumeric("glasses", it.n);
+                  if (it.type === "centerClothing") toggleNumeric("centerClothing", it.n);
+                  if (it.type === "rightClothing") toggleNumeric("rightClothing", it.n);
+                  if (it.type === "leftClothing") toggleNumeric("leftClothing", it.n);
+                };
+
+                // For preview tiles in Details: show only the specific item, others reset to 0
+                const previewCfg: AvatarConfig = {
+                  ...cfg,
+                  faceTexture: 0,
+                  glasses: 0,
+                  centerClothing: 0,
+                  rightClothing: 0,
+                  leftClothing: 0,
+                };
+                if (it.type === "faceTexture") previewCfg.faceTexture = it.n;
+                if (it.type === "glasses") previewCfg.glasses = it.n;
+                if (it.type === "centerClothing") previewCfg.centerClothing = it.n;
+                if (it.type === "rightClothing") previewCfg.rightClothing = it.n;
+                if (it.type === "leftClothing") previewCfg.leftClothing = it.n;
+
+                return (
+                  <Tile key={`${it.type}-${it.n}`} selected={selected} onClick={onClick}>
+                    <Avatar config={previewCfg} width="100%" height="100%" />
+                  </Tile>
+                );
+              })}
+            </ColumnPager>
+          )}
+
+          {tab === "Background" && (
+            <ColumnPager>
+              {BG_COLORS.map((c) => (
                 <Tile
-                  key={`cloth-${n}`}
-                  selected={cfg.clothingType === n}
-                  onClick={() => setCfg((x) => ({ ...x, clothingType: n }))}
+                  key={`bg-${c}`}
+                  selected={cfg.bgColor?.toLowerCase() === c.toLowerCase()}
+                  onClick={() => setCfg((x) => ({ ...x, bgColor: c }))}
                 >
-                  <Avatar
-                    key={`cloth-${n}-${cfg.skinColor}-${cfg.bodyColor}-${cfg.hairColor}-${cfg.bgColor}-${cfg.glasses}-${cfg.faceTexture}-${cfg.centerClothing}-${cfg.rightClothing}-${cfg.leftClothing}`}
-                    config={{ ...cfg, clothingType: n }}
-                    width="100%"
-                    height="100%"
-                  />
+                  <Avatar config={{ ...cfg, bgColor: c }} width="100%" height="100%" />
                 </Tile>
               ))}
             </ColumnPager>
-          </div>
-        )}
-
-        {tab === "Details" && (
-          <ColumnPager>
-            {[
-              ...faceTextureOptions.map((n) => ({ type: "faceTexture" as const, n })),
-              ...glassesOptions.map((n) => ({ type: "glasses" as const, n })),
-              ...centerClothingOptions.map((n) => ({ type: "centerClothing" as const, n })),
-              ...rightClothingOptions.map((n) => ({ type: "rightClothing" as const, n })),
-              ...leftClothingOptions.map((n) => ({ type: "leftClothing" as const, n })),
-            ].map((it) => {
-              const selected =
-                (it.type === "faceTexture" && cfg.faceTexture === it.n) ||
-                (it.type === "glasses" && cfg.glasses === it.n) ||
-                (it.type === "centerClothing" && cfg.centerClothing === it.n) ||
-                (it.type === "rightClothing" && cfg.rightClothing === it.n) ||
-                (it.type === "leftClothing" && cfg.leftClothing === it.n);
-
-              const onClick = () => {
-                if (it.type === "faceTexture") toggleNumeric("faceTexture", it.n);
-                if (it.type === "glasses") toggleNumeric("glasses", it.n);
-                if (it.type === "centerClothing") toggleNumeric("centerClothing", it.n);
-                if (it.type === "rightClothing") toggleNumeric("rightClothing", it.n);
-                if (it.type === "leftClothing") toggleNumeric("leftClothing", it.n);
-              };
-
-              // For preview tiles in Details: show only the specific item, others reset to 0
-              const previewCfg: AvatarConfig = {
-                ...cfg,
-                faceTexture: 0,
-                glasses: 0,
-                centerClothing: 0,
-                rightClothing: 0,
-                leftClothing: 0,
-              };
-              if (it.type === "faceTexture") previewCfg.faceTexture = it.n;
-              if (it.type === "glasses") previewCfg.glasses = it.n;
-              if (it.type === "centerClothing") previewCfg.centerClothing = it.n;
-              if (it.type === "rightClothing") previewCfg.rightClothing = it.n;
-              if (it.type === "leftClothing") previewCfg.leftClothing = it.n;
-
-              return (
-                <Tile key={`${it.type}-${it.n}`} selected={selected} onClick={onClick}>
-                  <Avatar
-                    key={`${it.type}-${it.n}-${previewCfg.skinColor}-${previewCfg.bodyColor}-${previewCfg.hairColor}-${previewCfg.bgColor}`}
-                    config={previewCfg}
-                    width="100%"
-                    height="100%"
-                  />
-                </Tile>
-              );
-            })}
-          </ColumnPager>
-        )}
-
-        {tab === "Background" && (
-          <ColumnPager>
-            {BG_COLORS.map((c) => (
-              <Tile
-                key={`bg-${c}`}
-                selected={cfg.bgColor?.toLowerCase() === c.toLowerCase()}
-                onClick={() => setCfg((x) => ({ ...x, bgColor: c }))}
-              >
-                <Avatar key={`bg-${c}`} config={{ ...cfg, bgColor: c }} width="100%" height="100%" />
-              </Tile>
-            ))}
-          </ColumnPager>
-        )}
-
+          )}
+        </div>
         <div className="save-row">
           <button className="save-btn" onClick={onSave}>
             Save Changes

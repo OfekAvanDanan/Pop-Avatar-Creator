@@ -29,6 +29,10 @@ type Props = {
 // ViewBox for all assets (based on original SVGs)
 const VIEWBOX = { w: 170, h: 221 };
 
+// Shared caches across all Avatar instances to avoid duplicate fetch+process work
+const GLOBAL_COLORIZED_CACHE = new Map<string, string>();
+const GLOBAL_INFLIGHT = new Map<string, Promise<string>>();
+
 // Direct require.context calls were moved to src/lib/assetContexts for modularity
 
 // Optional/Not available yet; keep stubs for future
@@ -199,7 +203,6 @@ export function Avatar(props: Props) {
   const h = height ?? VIEWBOX.h;
 
   // --- Colorization helpers ---
-  const cache = React.useRef(new Map<string, string>()).current;
   const escapeReg = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const toDataUrl = (svg: string) => {
     const base64 =
@@ -216,7 +219,7 @@ export function Avatar(props: Props) {
       return url ? `${url}|${JSON.stringify(replacements)}` : undefined;
     }, [url, replacements]);
 
-    const [dataUrl, setDataUrl] = React.useState<string | undefined>(() => (key ? cache.get(key) : undefined));
+    const [dataUrl, setDataUrl] = React.useState<string | undefined>(() => (key ? GLOBAL_COLORIZED_CACHE.get(key) : undefined));
 
     React.useEffect(() => {
       let cancelled = false;
@@ -224,28 +227,42 @@ export function Avatar(props: Props) {
         setDataUrl(url);
         return;
       }
-      const cached = cache.get(key);
+      const cached = GLOBAL_COLORIZED_CACHE.get(key);
       if (cached) {
         setDataUrl(cached);
         return;
       }
-      fetch(url)
-        .then((r) => r.text())
-        .then((svg) => {
-          let text = svg;
-          for (const rep of replacements) {
-            const from = rep.from.trim();
-            const to = rep.to.trim();
-            const re = new RegExp(escapeReg(from), "ig");
-            text = text.replace(re, to);
-          }
-          const encoded = toDataUrl(text);
-          if (!cancelled) {
-            cache.set(key, encoded);
-            setDataUrl(encoded);
-          }
+      // Deduplicate work across components rendering the same (url+replacements)
+      const run = () =>
+        fetch(url)
+          .then((r) => r.text())
+          .then((svg) => {
+            let text = svg;
+            for (const rep of replacements) {
+              const from = rep.from.trim();
+              const to = rep.to.trim();
+              const re = new RegExp(escapeReg(from), "ig");
+              text = text.replace(re, to);
+            }
+            return toDataUrl(text);
+          });
+
+      let promise = GLOBAL_INFLIGHT.get(key);
+      if (!promise) {
+        promise = run().catch(() => url);
+        GLOBAL_INFLIGHT.set(key, promise);
+      }
+
+      promise
+        .then((encoded) => {
+          if (!encoded) return;
+          GLOBAL_COLORIZED_CACHE.set(key!, encoded);
+          if (!cancelled) setDataUrl(encoded);
         })
-        .catch(() => setDataUrl(url));
+        .finally(() => {
+          // Clean up in-flight once finished
+          GLOBAL_INFLIGHT.delete(key!);
+        });
       return () => {
         cancelled = true;
       };
