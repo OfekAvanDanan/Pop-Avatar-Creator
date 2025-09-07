@@ -95,15 +95,16 @@
   box-shadow: 0 4px 0 #2a1a1f;
   padding: 0;
   overflow: hidden;
-  aspect-ratio: 170 / 221;
+  aspect-ratio: 1 / 1;
 }
+.tile.selected {
+  outline: 3px solid #2a1a1f;
+}
+
 .tile svg {
   width: 100%;
   height: 100%;
   display: block;
-}
-.tile.selected {
-  outline: 3px solid #2a1a1f;
 }
 
 .details-row {

@@ -137,7 +137,7 @@ export default function AvatarBuilder() {
             <div className="tiles-grid">
               {faceOptions.map((n) => (
                 <Tile key={n} selected={cfg.faceType === n} onClick={() => setCfg((x) => ({ ...x, faceType: n }))}>
-                  <Avatar config={{ ...cfg, faceType: n }} width="100%" height="100%" />
+                  <Avatar config={{ ...cfg, faceType: n }} width={84} height={109} />
                 </Tile>
               ))}
             </div>
@@ -159,11 +159,11 @@ export default function AvatarBuilder() {
             <div className="tiles-grid">
               {/* None / Bald option */}
               <Tile selected={!cfg.hairType} onClick={() => setNumeric('hairType', 0)}>
-                <Avatar config={{ ...cfg, hairType: 0 }} width="100%" height="100%" />
+                <Avatar config={{ ...cfg, hairType: 0 }} width={84} height={109} />
               </Tile>
               {hairOptions.map((n) => (
                 <Tile key={n} selected={cfg.hairType === n} onClick={() => toggleNumeric('hairType', n)}>
-                  <Avatar config={{ ...cfg, hairType: n }} width="100%" height="100%" />
+                  <Avatar config={{ ...cfg, hairType: n }} width={84} height={109} />
                 </Tile>
               ))}
             </div>
@@ -189,7 +189,7 @@ export default function AvatarBuilder() {
                   selected={cfg.clothingType === n}
                   onClick={() => setCfg((x) => ({ ...x, clothingType: n }))}
                 >
-                  <Avatar config={{ ...cfg, clothingType: n }} width="100%" height="100%" />
+                  <Avatar config={{ ...cfg, clothingType: n }} width={84} height={109} />
                 </Tile>
               ))}
             </div>
@@ -237,7 +237,7 @@ export default function AvatarBuilder() {
 
               return (
                 <Tile key={`${it.type}-${it.n}`} selected={selected} onClick={onClick}>
-                  <Avatar config={previewCfg} width="100%" height="100%" />
+                  <Avatar config={previewCfg} width={84} height={109} />
                 </Tile>
               );
             })}
@@ -252,7 +252,7 @@ export default function AvatarBuilder() {
                 selected={cfg.bgColor?.toLowerCase() === c.toLowerCase()}
                 onClick={() => setCfg((x) => ({ ...x, bgColor: c }))}
               >
-                <Avatar config={{ ...cfg, bgColor: c }} width="100%" height="100%" />
+                <Avatar config={{ ...cfg, bgColor: c }} width={84} height={109} />
               </Tile>
             ))}
           </div>

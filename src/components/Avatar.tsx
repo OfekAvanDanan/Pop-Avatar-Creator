@@ -18,8 +18,8 @@ import {
 type Props = {
   config?: AvatarConfig;
   configString?: string;
-  width?: number | string;
-  height?: number | string;
+  width?: number;
+  height?: number;
   className?: string;
   style?: React.CSSProperties;
 };
@@ -266,6 +266,7 @@ export function Avatar(props: Props) {
       viewBox={`0 0 ${VIEWBOX.w} ${VIEWBOX.h}`}
       width={w}
       height={h}
+      preserveAspectRatio="xMidYMid slice"
       className={className}
       style={style}
       xmlns="http://www.w3.org/2000/svg"
