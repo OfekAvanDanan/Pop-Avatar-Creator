@@ -36,3 +36,10 @@
   display: block;
   animation: fade-in 250ms, fade-out 250ms ease;
 }
+
+@media (max-width: 560px) {
+  .tile {
+    border-radius: var(--r-lg);
+    scale: 1; /* make tiles a bit larger on mobile */
+  }
+}

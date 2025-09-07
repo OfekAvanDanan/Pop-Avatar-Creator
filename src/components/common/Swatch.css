@@ -22,3 +22,10 @@
   outline: var(--bd-3) solid var(--primary-strong);
   outline-offset: 2px;
 }
+
+@media (max-width: 560px) {
+  .swatch {
+    width: 34px;
+    height: 34px;
+  }
+}

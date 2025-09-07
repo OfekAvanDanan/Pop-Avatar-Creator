@@ -63,3 +63,19 @@
     outline: var(--bd-1) solid var(--primary);
     outline-offset: 2px;
 }
+
+/* Mobile tuning */
+@media (max-width: 560px) {
+    .builder-tabs {
+        justify-content: space-between;
+        gap: 0px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .tab {
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+
+}

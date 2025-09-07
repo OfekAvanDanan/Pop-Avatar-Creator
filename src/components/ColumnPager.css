@@ -48,6 +48,17 @@
     margin-right: var(--space-xs);
 }
 
+/* Mobile tuning: larger tiles and tighter gaps, while keeping 3x2 columns */
+@media (max-width: 560px) {
+  .cpager .cpager-track {
+    gap: var(--space-sm);
+  }
+  .cpager-col {
+    flex: 0 0 calc((100% - 2 * var(--space-sm)) / 3);
+    gap: var(--space-sm);
+  }
+}
+
 .cpager-dots {
     display: flex;
     justify-content: center;

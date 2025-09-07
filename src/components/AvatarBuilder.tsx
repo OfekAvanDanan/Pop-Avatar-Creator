@@ -103,6 +103,7 @@ export default function AvatarBuilder() {
         className="builder-hero"
         style={{ ["--hero-bg" as unknown as string]: cfg.bgColor || "#E72787" } as React.CSSProperties}
       >
+        <div className="builder-title">Your Profile</div>
         <div className="builder-preview">
           <Avatar config={cfg} hideBackground cover={true} width="100%" height="100%" />
         </div>
