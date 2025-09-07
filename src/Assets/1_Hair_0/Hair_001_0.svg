@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 221">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 238 238">
   <defs>
     <style>
       .cls-1 {
-        font-family: MyriadHebrew-Regular, 'Myriad Hebrew';
-        font-size: 32.23px;
-      }
-
-      .cls-2 {
         fill: #694118;
       }
     </style>
   </defs>
-  <g>
-    <text class="cls-1" transform="translate(6.19 -10.42)"><tspan x="0" y="0">Hairstyles</tspan></text>
-    <text class="cls-1" transform="translate(162.97 -10.42)"><tspan x="0" y="0">layer 1 &amp; 11</tspan></text>
-  </g>
-  <path class="cls-2" d="M128.57,43.65c0,51.25-19.89,92.8-44.43,92.8s-44.44-41.55-44.44-92.8h88.88Z"/>
+  <path class="cls-1" d="M162.57,60.65c0,51.25-19.89,92.8-44.43,92.8s-44.44-41.55-44.44-92.8h88.88Z"/>
 </svg>
