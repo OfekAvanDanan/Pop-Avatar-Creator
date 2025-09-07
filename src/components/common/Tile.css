@@ -29,7 +29,7 @@
 .tile:hover {
   box-shadow: var(--shadow-strong);
   scale: 0.95;
-  transform: translateY(-3px);
+  transform: var(--transform-shadow);
 }
 
 .tile:active {

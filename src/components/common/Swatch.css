@@ -15,7 +15,7 @@
 
 .swatch:hover {
   box-shadow: var(--shadow-strong);
-  transform: translate(-2px, -2px);
+  transform: var(--transform-shadow);
 }
 
 .swatch:focus-visible {

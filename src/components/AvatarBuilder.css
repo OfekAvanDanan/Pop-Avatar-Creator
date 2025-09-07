@@ -150,11 +150,6 @@
 }
 
 .save-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-xl);
-}
-
-.save-btn:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-xl);
+  transform: var(--transform-shadow);
+  box-shadow: var(--shadow-strong);
 }

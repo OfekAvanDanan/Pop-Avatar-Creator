@@ -1,8 +1,28 @@
 .builder-tabs {
+    position: relative;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin-bottom: 8px;
 }
+
+.tab-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: var(--r-md);
+    transition: transform var(--t-slow), width var(--t-slow), height var(--t-slow), background-color var(--t-slow);
+    z-index: 0;
+    pointer-events: none;
+    box-shadow: var(--shadow);
+    transition: var(--U-transition);
+}
+
+.builder-tabs:hover .tab-indicator:hover {
+    transform: var(--transform-shadow);
+    box-shadow: var(--shadow-strong);
+}
+
 
 .tab {
     background: transparent;
@@ -18,22 +38,25 @@
     outline: none;
     position: relative;
     top: 0;
-    transition: background-color var(--t-fast), color var(--t-fast), transform var(--t-fast);
+    transition: background-color var(--t-fast), color var(--t-slow), transform var(--t-fast);
 
 
     font-family: var(--fonts);
     font-weight: var(--font-regular);
+    z-index: 1;
+    /* above indicator */
 }
 
 .tab.active {
-    background: var(--primary);
+    background: transparent;
     color: #fff;
-    transform: translateY(-1px);
+    transform: none;
     font-weight: 900;
 }
 
+
 .tab:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 .tab:focus-visible {
