@@ -5,7 +5,7 @@
   height: 900px;
   margin: 0 auto;
   background: var(--panel);
-  border: var(--bd-1) solid var(--outline);
+  border: var(--border);
   border-radius: var(--r-md);
   overflow: hidden;
   box-shadow: var(--shadow-strong);
@@ -49,16 +49,18 @@
 
 .builder-title {
   position: absolute;
+  width: 100%;
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 24px;
+  font-size: 37pt;
   line-height: 1;
-  font-weight: 800;
-  color: #fff;
-  text-shadow: var(--text-shadow-1);
+  font-weight: 400;
+  color: var(--panel);
+  text-shadow: var(--text-outline), var(--shadow-strong);
+  letter-spacing: 1px;
+  font-family: "duckie", sans-serif;
   z-index: 4;
-  /* above avatar and outline */
   pointer-events: none;
 }
 

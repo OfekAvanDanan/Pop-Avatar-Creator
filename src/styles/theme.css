@@ -13,9 +13,21 @@
   --shadow: 0px 0px 0 var(--ink), 4px 4px 0 var(--ink-weak);
   --shadow-strong: 3px 3px 0 var(--ink), 6px 6px 0 var(--ink-weak);
   --transform-shadow: translate(-2px, -2px);
+  --border: var(--bd-1) solid var(--outline);
 
   /* Text shadows */
   --text-shadow-1: 0 3px 0 var(--ink);
+
+  /*Text Outlines*/
+  --text-outline: 1px 0 var(--ink),
+    -1px 0 var(--ink),
+    0 1px var(--ink),
+    0 -1px var(--ink),
+    1px 1px var(--ink),
+    -1px 1px var(--ink),
+    1px -1px var(--ink),
+    -1px -1px var(--ink);
+
   /* Radii */
   --r-sm: 12px;
   --r-md: 16px;
