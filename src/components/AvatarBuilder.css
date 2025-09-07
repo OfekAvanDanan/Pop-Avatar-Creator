@@ -137,6 +137,8 @@
 
 .save-btn {
   background: var(--primary);
+  font-family: var(--fonts);
+  font-weight: var(--font-bold);
   color: #fff;
   border: none;
   font-weight: 800;

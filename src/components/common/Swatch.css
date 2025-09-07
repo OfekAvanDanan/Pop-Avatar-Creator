@@ -3,9 +3,22 @@
   height: 28px;
   border-radius: 50%;
   border: var(--bd-1) solid var(--outline);
-  box-shadow: var(--shadow-soft);
-  transition: transform var(--t-fast);
+  box-shadow: var(--shadow);
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
 }
-.swatch.selected { outline: var(--bd-3) solid var(--primary); }
-.swatch:hover { transform: translateY(-1px); }
-.swatch:focus-visible { outline: var(--bd-3) solid var(--primary-strong); outline-offset: 2px; }
+
+
+.swatch.selected {
+  box-shadow: var(--shadow);
+  border: var(--bd-2) solid var(--outline);
+}
+
+.swatch:hover {
+  box-shadow: var(--shadow-strong);
+  transform: translate(-2px, -2px);
+}
+
+.swatch:focus-visible {
+  outline: var(--bd-3) solid var(--primary-strong);
+  outline-offset: 2px;
+}

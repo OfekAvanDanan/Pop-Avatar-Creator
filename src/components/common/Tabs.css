@@ -19,12 +19,17 @@
     position: relative;
     top: 0;
     transition: background-color var(--t-fast), color var(--t-fast), transform var(--t-fast);
+
+
+    font-family: var(--fonts);
+    font-weight: var(--font-regular);
 }
 
 .tab.active {
     background: var(--primary);
     color: #fff;
     transform: translateY(-1px);
+    font-weight: 900;
 }
 
 .tab:hover {

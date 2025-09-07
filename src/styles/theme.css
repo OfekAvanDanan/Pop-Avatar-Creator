@@ -3,15 +3,15 @@
   ;
   --panel: #FAEFF4;
   --ink: #16070E;
+  --ink-weak: #16070e20;
   --primary: #E72787;
   --primary-strong: #E72787;
   --tile-bg: #FAEFF4;
   --muted: #88767E;
   --outline: #16070E;
   /* Shadows */
-  --shadow: 4px 4px 0 var(--ink);
-  --shadow-md: 5px 5px 0 var(--ink);
-  --shadow-strong: 6px 6px 0 var(--ink);
+  --shadow: 1px 1px 0 var(--ink), 4px 4px 0 var(--ink-weak);
+  --shadow-strong: 3px 3px 0 var(--ink), 6px 6px 0 var(--ink-weak);
   --shadow-xl: 7px 7px 0 var(--ink);
   --shadow-soft: 0 3px 0 var(--ink);
   /* Text shadows */
@@ -28,9 +28,13 @@
   /* Borders */
   --bd-1: 2px;
   --bd-2: 4px;
-  --bd-3: 3px;
   /* Motion */
-  --t-fast: 120ms ease;
+  --t-fast: 120ms ease-in-out;
+
+  --fonts: "Montserrat", sans-serif;
+  --font-light: 400;
+  --font-regular: 700;
+  --font-bold: 900;
 }
 
 /* Transitions & motion */
