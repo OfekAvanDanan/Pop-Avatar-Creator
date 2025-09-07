@@ -99,7 +99,10 @@ export default function AvatarBuilder() {
 
   return (
     <div className="builder-root">
-      <div className="builder-hero" style={{ background: cfg.bgColor || "#E72787" }}>
+      <div
+        className="builder-hero"
+        style={{ ["--hero-bg" as unknown as string]: cfg.bgColor || "#E72787" } as React.CSSProperties}
+      >
         <div className="builder-preview">
           <Avatar config={cfg} hideBackground cover={true} width="100%" height="100%" />
         </div>
@@ -205,11 +208,7 @@ export default function AvatarBuilder() {
                     selected={cfg.clothingType === n}
                     onClick={() => setCfg((x) => ({ ...x, clothingType: n }))}
                   >
-                    <Avatar
-                      config={{ ...cfg, clothingType: n }}
-                      width="100%"
-                      height="100%"
-                    />
+                    <Avatar config={{ ...cfg, clothingType: n }} width="100%" height="100%" />
                   </Tile>
                 ))}
               </ColumnPager>

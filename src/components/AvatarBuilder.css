@@ -18,6 +18,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  /* clip the arc frame */
+  background: var(--panel);
+  /* outside the arc */
+  /* Arc geometry (shared by fill, outline and clipping) */
+  --arc-radius: 70%;
+  /* half of width -> 140% circle width */
+  --arc-top: -42%;
+  /* move circle up to create a smile */
+  --arc-center-y: calc(var(--arc-radius) + var(--arc-top));
+}
+
+/* Bottom curved fill (behind avatar) revealing the panel background */
+.builder-hero::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: var(--arc-top);
+  /* controls arc height (smiling) */
+  width: calc(2 * var(--arc-radius));
+  aspect-ratio: 1 / 1;
+  /* perfect circle */
+  transform: translateX(-50%);
+  background: var(--hero-bg, var(--primary));
+  border-radius: 50%;
+  z-index: 1;
+  /* behind avatar */
 }
 
 .builder-title {
@@ -37,7 +64,31 @@
   overflow: hidden;
   background: transparent;
   animation: fade-in 250ms, fade-out 250ms ease;
-  z-index: 1;
+  position: relative;
+  /* enable z-index */
+  z-index: 2;
+  /* above the fill */
+  /* Clip avatar to the same smiling circle */
+  clip-path: circle(var(--arc-radius) at 50% var(--arc-center-y));
+  transform: translateY(2px);
+  /* raise slightly so avatar stays inside */
+}
+
+/* Arc outline drawn above avatar (transparent fill) */
+.builder-hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: var(--arc-top);
+  width: calc(2 * var(--arc-radius));
+  aspect-ratio: 1 / 1;
+  transform: translateX(-50%);
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 0 0 0 var(--bd-2) var(--outline);
+  pointer-events: none;
+  z-index: 3;
+  /* on top so the stroke is visible */
 }
 
 .builder-body {
