@@ -69,25 +69,25 @@ export default function AvatarBuilder() {
     } catch {}
     // Persist a copy (optional), and copy to clipboard
     try {
-      localStorage.setItem('AVATAR_STRING', s);
+      localStorage.setItem("AVATAR_STRING", s);
     } catch {}
     if (navigator?.clipboard?.writeText) {
       navigator.clipboard.writeText(snippet).then(
         () => {
           // eslint-disable-next-line no-console
-          console.log('Saved & copied to clipboard:', snippet);
-          alert('Saved and copied to clipboard!\n' + snippet);
+          console.log("Saved & copied to clipboard:", snippet);
+          alert("Saved and copied to clipboard!\n" + snippet);
         },
         () => {
           // eslint-disable-next-line no-console
-          console.log('Saved (clipboard unavailable):', snippet);
-          alert('Saved! (Could not copy automatically)\n' + snippet);
+          console.log("Saved (clipboard unavailable):", snippet);
+          alert("Saved! (Could not copy automatically)\n" + snippet);
         }
       );
     } else {
       // eslint-disable-next-line no-console
-      console.log('Saved (no clipboard API):', snippet);
-      alert('Saved! (Clipboard API unavailable)\n' + snippet);
+      console.log("Saved (no clipboard API):", snippet);
+      alert("Saved! (Clipboard API unavailable)\n" + snippet);
     }
   };
 
@@ -99,7 +99,7 @@ export default function AvatarBuilder() {
 
   return (
     <div className="builder-root">
-      <div className="builder-hero" style={{ background: cfg.bgColor || "#f43ca0" }}>
+      <div className="builder-hero" style={{ background: cfg.bgColor || "#E72787" }}>
         <div className="builder-preview">
           <Avatar config={cfg} hideBackground cover={true} width="100%" height="100%" />
         </div>

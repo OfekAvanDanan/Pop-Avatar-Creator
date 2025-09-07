@@ -1,12 +1,13 @@
 :root {
-  --bg: #f162f1;
-  --panel: #f6e9f0;
-  --ink: #2a1a1f;
-  --primary: #ff2d92;
-  --primary-strong: #f43ca0;
-  --tile-bg: #fff0f6;
-  --muted: #d0c4cb;
-  --outline: #2a1a1f;
+  --bg: #F2E0E9;
+  ;
+  --panel: #FAEFF4;
+  --ink: #16070E;
+  --primary: #E72787;
+  --primary-strong: #E72787;
+  --tile-bg: #FAEFF4;
+  --muted: #88767E;
+  --outline: #16070E;
   --shadow: 4px 4px 0 var(--ink);
   --shadow-strong: 6px 6px 0 var(--ink);
   --r-sm: 12px;
