@@ -230,7 +230,7 @@
 }
 
 /* Responsive: full-bleed layout on small screens */
-@media (max-width: 543px) {
+@media (max-width: 580px) {
 
   /* Remove outer padding from app wrapper (overrides inline) */
   .App {
@@ -246,12 +246,16 @@
     box-shadow: none;
   }
 
+  .builder-title {
+    width: 80%;
+  }
+
   .builder-hero {
-    height: 75dvw;
+    height: 95dvw;
     aspect-ratio: 1 / 1;
     /* Mobile-tuned arc */
     --arc-radius: 140dvw;
-    --arc-top: -205dvw;
+    --arc-top: -185dvw;
     overflow: visible;
   }
 
@@ -266,12 +270,12 @@
 
   .builder-preview {
     transform: translateY(0.4vh);
-    width: 70%;
+    width: 80%;
 
   }
 
   .builder-preview .avatar {
-    transform: scale(var(--avatar-scale, 0.9)) translateY(10dvw);
+    transform: scale(var(--avatar-scale, 1)) translateY(6dvw);
   }
 
 }
