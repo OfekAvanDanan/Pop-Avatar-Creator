@@ -16,7 +16,7 @@ jest.mock('./lib/assetContexts', () => ({
 }));
 import App from './App';
 
-test('renders builder title', () => {
+test('renders Face tab', () => {
   render(<App />);
-  expect(screen.getByText(/Your Profile/i)).toBeInTheDocument();
+  expect(screen.getByText(/Face/i)).toBeInTheDocument();
 });

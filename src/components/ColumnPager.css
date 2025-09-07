@@ -1,0 +1,8 @@
+.cpager { display: flex; flex-direction: column; gap: 8px; }
+.cpager-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: none; -ms-overflow-style: none; }
+.cpager-track::-webkit-scrollbar { display: none; }
+.cpager-col { flex: 0 0 calc((100% - 2 * 12px) / 3); display: grid; grid-template-rows: 1fr 1fr; gap: 12px; scroll-snap-align: start; }
+.cpager-dots { display: flex; justify-content: center; gap: 6px; }
+.cpager-dot { width: 8px; height: 8px; border-radius: 50%; background: #d0c4cb; border: none; padding: 0; display: inline-block; }
+.cpager-dot.active { background: var(--ink); transform: scale(1.1); }
+

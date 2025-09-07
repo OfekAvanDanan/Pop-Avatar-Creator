@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { AvatarConfig, parseAvatarString, pad3 } from "../lib/avatar";
 // Polyfill require.context for tests before using it
 import "../polyfills/requireContext";
@@ -22,12 +22,10 @@ type Props = {
   height?: number | string;
   className?: string;
   style?: React.CSSProperties;
-  hideBackground?: boolean;
-  cover?: boolean; // true: cover (slice), false: contain (meet)
 };
 
-// ViewBox for all assets (based on original SVGs)
-const VIEWBOX = { w: 170, h: 221 };
+// ViewBox for all assets (based on files)
+const VIEWBOX = { w: 238, h: 238 };
 
 // Direct require.context calls were moved to src/lib/assetContexts for modularity
 
@@ -188,7 +186,7 @@ function getMouthUrl(id?: number) {
 }
 
 export function Avatar(props: Props) {
-  const { width, height, className, style, hideBackground, cover = true } = props;
+  const { width, height, className, style } = props;
   const cfg = React.useMemo<AvatarConfig>(() => {
     if (props.config) return props.config;
     if (props.configString) return parseAvatarString(props.configString);
@@ -322,34 +320,18 @@ export function Avatar(props: Props) {
 
   const cls = ['avatar', className].filter(Boolean).join(' ');
 
-  const par = cover ? 'xMidYMid slice' : 'xMidYMid meet';
-  const BLEED = 1; // add small bleed to avoid subpixel gaps
-  const imgX = -BLEED / 2;
-  const imgY = -BLEED / 2;
-  const imgW = VIEWBOX.w + BLEED;
-  const imgH = VIEWBOX.h + BLEED;
-
   return (
     <svg
       viewBox={`0 0 ${VIEWBOX.w} ${VIEWBOX.h}`}
       width={w}
       height={h}
-      preserveAspectRatio={par}
+      preserveAspectRatio="xMidYMid slice"
       className={cls}
       style={{ display: 'block', ...style }}
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Background color */}
-      {!hideBackground && (
-        <rect
-          x={imgX}
-          y={imgY}
-          width={imgW}
-          height={imgH}
-          fill={cfg.bgColor || "transparent"}
-          shapeRendering="crispEdges"
-        />
-      )}
+      <rect x={0} y={0} width={VIEWBOX.w} height={VIEWBOX.h} fill={cfg.bgColor || "transparent"} />
 
       {/* Stack all layer images */}
       {layers.map((href, idx) =>
@@ -358,11 +340,11 @@ export function Avatar(props: Props) {
             key={idx}
             href={href}
             xlinkHref={href as any}
-            x={imgX}
-            y={imgY}
-            width={imgW}
-            height={imgH}
-            preserveAspectRatio={par}
+            x={0}
+            y={0}
+            width={VIEWBOX.w}
+            height={VIEWBOX.h}
+            preserveAspectRatio="xMidYMid meet"
           />
         ) : null
       )}
