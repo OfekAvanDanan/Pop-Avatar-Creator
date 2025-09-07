@@ -2,6 +2,7 @@ export type AvatarConfig = {
   bgColor?: string;
   bodyColor?: string;
   skinColor?: string;
+  hairColor?: string;
   faceType?: number;
   hairType?: number; // used for both Hair_0 and Hair_1
   clothingType?: number; // used for both Clothing_0 and Clothing_1
@@ -56,3 +57,25 @@ export function pad3(n: number | undefined): string | undefined {
   return i.toString().padStart(3, "0");
 }
 
+export function buildAvatarString(cfg: AvatarConfig): string {
+  // Keep order: bg, body, skin, face, hair, clothing, faceTexture, center, right, left, eyes, nose, mouth, glasses
+  const seq: (string | number | undefined)[] = [
+    cfg.bgColor,
+    cfg.bodyColor,
+    cfg.skinColor,
+    cfg.faceType,
+    cfg.hairType,
+    cfg.clothingType,
+    cfg.faceTexture,
+    cfg.centerClothing,
+    cfg.rightClothing,
+    cfg.leftClothing,
+    cfg.eyes,
+    cfg.nose,
+    cfg.mouth,
+    cfg.glasses,
+  ];
+  return seq
+    .map((v) => (v == null ? '' : String(v)))
+    .join(',');
+}

@@ -1,11 +1,4 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
-
-// Jest: stub Webpack's require.context on all functions to avoid crashes in modules
-// We attach to Function.prototype so every module-local `require` picks it up.
+// Ensure require.context exists in non-webpack environments (e.g., Jest)
 (() => {
   const F: any = Function.prototype as any;
   if (typeof F.context !== 'function') {
@@ -22,3 +15,5 @@ import '@testing-library/jest-dom';
     });
   }
 })();
+
+export {};

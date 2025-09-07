@@ -1,11 +1,25 @@
 import React from 'react';
 import { AvatarConfig, parseAvatarString, pad3 } from '../lib/avatar';
+// Polyfill require.context for tests before using it
+import '../polyfills/requireContext';
+import {
+  faceCtx,
+  hair0Ctx,
+  hair1Ctx,
+  clothing0Ctx,
+  clothing1Ctx,
+  faceTextureCtx,
+  centerClothingCtx,
+  rightClothingCtx,
+  leftClothingCtx,
+  glassesCtx,
+} from '../lib/assetContexts';
 
 type Props = {
   config?: AvatarConfig;
   configString?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   className?: string;
   style?: React.CSSProperties;
 };
@@ -13,17 +27,7 @@ type Props = {
 // ViewBox for all assets (based on files)
 const VIEWBOX = { w: 170, h: 221 };
 
-// Helper to create resolvers for folders using require.context
-const faceCtx = require.context('../Assets/2_Face', false, /\.\/Face_\d+\.svg$/);
-const hair0Ctx = require.context('../Assets/1_Hair_0', false, /\.\/Hair_\d{3}_0\.svg$/);
-const hair1Ctx = require.context('../Assets/14_Hair_1', false, /\.\/Hair_\d{3}_1\.svg$/);
-const clothing0Ctx = require.context('../Assets/4_Clothing_0', false, /\.\/Clothing_\d+_0\.svg$/);
-const clothing1Ctx = require.context('../Assets/9_Clothing_1', false, /\.\/Clothing_\d+_1\.svg$/);
-const faceTextureCtx = require.context('../Assets/5_FaceTexture', false, /\.\/FaceTexture_\d+\.svg$/);
-const centerClothingCtx = require.context('../Assets/6_Center_Clothing', false, /\.\/CenterClothing_\d+\.svg$/);
-const rightClothingCtx = require.context('../Assets/7_Right_Clothing', false, /\.\/RightClothing_\d+\.svg$/);
-const leftClothingCtx = require.context('../Assets/8_Left_Clothing', false, /\.\/LeftClothing_\d+\.svg$/);
-const glassesCtx = require.context('../Assets/13_Glasses', false, /\.\/Glasses_\d+\.svg$/);
+// Direct require.context calls were moved to src/lib/assetContexts for modularity
 
 // Optional/Not available yet; keep stubs for future
 let eyesCtx: ((k: string) => string) | null = null;
@@ -134,6 +138,63 @@ export function Avatar(props: Props) {
   const w = width ?? VIEWBOX.w;
   const h = height ?? VIEWBOX.h;
 
+  // --- Colorization helpers ---
+  const cache = React.useRef(new Map<string, string>()).current;
+  const escapeReg = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const toDataUrl = (svg: string) => {
+    const base64 = typeof window !== 'undefined'
+      ? window.btoa(unescape(encodeURIComponent(svg)))
+      : Buffer.from(svg, 'utf8').toString('base64');
+    return `data:image/svg+xml;base64,${base64}`;
+  };
+  const useColorized = (
+    url: string | undefined,
+    replacements: ReadonlyArray<{ from: string; to: string }>
+  ): string | undefined => {
+    const key = React.useMemo(() => {
+      return url ? `${url}|${JSON.stringify(replacements)}` : undefined;
+    }, [url, replacements]);
+
+    const [dataUrl, setDataUrl] = React.useState<string | undefined>(() =>
+      key ? cache.get(key) : undefined
+    );
+
+    React.useEffect(() => {
+      let cancelled = false;
+      if (!url || !key || replacements.length === 0) {
+        setDataUrl(url);
+        return;
+      }
+      const cached = cache.get(key);
+      if (cached) {
+        setDataUrl(cached);
+        return;
+      }
+      fetch(url)
+        .then((r) => r.text())
+        .then((svg) => {
+          let text = svg;
+          for (const rep of replacements) {
+            const from = rep.from.trim();
+            const to = rep.to.trim();
+            const re = new RegExp(escapeReg(from), 'ig');
+            text = text.replace(re, to);
+          }
+          const encoded = toDataUrl(text);
+          if (!cancelled) {
+            cache.set(key, encoded);
+            setDataUrl(encoded);
+          }
+        })
+        .catch(() => setDataUrl(url));
+      return () => {
+        cancelled = true;
+      };
+    }, [url, key, replacements]);
+
+    return dataUrl ?? url;
+  };
+
   // Resolve URLs for all layers (gracefully skip if not found)
   const urls = {
     hair0: getHair0Url(cfg.hairType),
@@ -152,24 +213,49 @@ export function Avatar(props: Props) {
     hair1: getHair1Url(cfg.hairType),
   } as const;
 
+  // Apply color replacements:
+  // - Face and Clothing_1: replace #e8bda7 (skin) with cfg.skinColor
+  // - Body: replace #c2272d (clothing color) with cfg.bodyColor
+  const faceReps = React.useMemo(
+    () => (cfg.skinColor ? [{ from: '#e8bda7', to: cfg.skinColor }] as const : [] as const),
+    [cfg.skinColor]
+  );
+  const cloth1Reps = React.useMemo(
+    () => (cfg.skinColor ? [{ from: '#e8bda7', to: cfg.skinColor }] as const : [] as const),
+    [cfg.skinColor]
+  );
+  const bodyReps = React.useMemo(
+    () => (cfg.bodyColor ? [{ from: '#c2272d', to: cfg.bodyColor }] as const : [] as const),
+    [cfg.bodyColor]
+  );
+  const hairReps = React.useMemo(
+    () => (cfg.hairColor ? [{ from: '#694118', to: cfg.hairColor }] as const : [] as const),
+    [cfg.hairColor]
+  );
+  const faceUrl = useColorized(urls.face, faceReps);
+  const clothing1Url = useColorized(urls.clothing1, cloth1Reps);
+  const bodyColUrl = useColorized(urls.body, bodyReps);
+  const hair0Url = useColorized(urls.hair0, hairReps);
+  const hair1Url = useColorized(urls.hair1, hairReps);
+
   // Layer order per spec (0..14):
   // 0 Background, 1 Hair_0, 2 Face, 3 Body, 4 Clothing_0, 5 Face texture, 6 Center, 7 Right, 8 Left, 9 Clothing_1, 10 Eyes, 11 Nose, 12 Mouth, 13 Glasses, 14 Hair_1
   const layers: (string | undefined)[] = [
     undefined, // background handled separately
-    urls.hair0,
-    urls.face,
-    urls.body,
+    hair0Url,
+    faceUrl,
+    bodyColUrl,
     urls.clothing0,
     urls.faceTexture,
     urls.centerClothing,
     urls.rightClothing,
     urls.leftClothing,
-    urls.clothing1,
+    clothing1Url,
     urls.eyes,
     urls.nose,
     urls.mouth,
     urls.glasses,
-    urls.hair1,
+    hair1Url,
   ];
 
   // Note on colors: background is supported. Body/skin recoloring is not applied yet because SVGs contain internal styles.
@@ -193,6 +279,7 @@ export function Avatar(props: Props) {
           <image
             key={idx}
             href={href}
+            xlinkHref={href as any}
             x={0}
             y={0}
             width={VIEWBOX.w}
