@@ -37,15 +37,15 @@
   --font-regular: 700;
   --font-bold: 900;
 
-  --U-transition: transform 120ms ease,
-    box-shadow 120ms ease,
-    outline-color 120ms ease,
-    background-color 120ms ease;
+  --U-transition: transform --t-fast,
+    box-shadow --t-fast,
+    outline-color --t-fast,
+    background-color --t-fast;
 }
 
 /* Transitions & motion */
 .u-transition {
-  transition: transform 120ms ease, box-shadow 120ms ease, outline-color 120ms ease, background-color 120ms ease;
+  transition: var(--U-transition);
 }
 
 @keyframes fade-in {
