@@ -12,8 +12,9 @@
     box-shadow 120ms ease,
     outline-color 120ms ease,
     background-color 120ms ease,
-    translateY 240ms ease-in-out,
-    scale 240ms ease-in-out;
+    translateY 120ms ease-in-out,
+    transform 120ms ease-in-out,
+    scale 120ms ease-in-out;
 }
 
 
