@@ -4,7 +4,7 @@
   border-radius: 50%;
   border: var(--bd-1) solid var(--outline);
   box-shadow: var(--shadow);
-  transition: var(--U-transition);
+  transition: var(--u-transition);
 }
 
 

@@ -11,10 +11,11 @@
     left: 0;
     top: 0;
     border-radius: var(--r-md);
-    transition: transform var(--t-slow), width var(--t-slow), height var(--t-slow), background-color var(--t-slow);
+    transition: transform 300ms ease-in-out, width var(--t-slow), height var(--t-slow), background-color var(--t-slow);
     z-index: 0;
     pointer-events: none;
-    transition: var(--U-transition);
+    transition: var(--u-transition);
+    box-shadow: var(--shadow);
 }
 
 .builder-tabs:hover .tab-indicator:hover {

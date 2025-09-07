@@ -8,14 +8,7 @@
   aspect-ratio: 1 / 1;
   position: relative;
   scale: 0.96;
-  transition:
-    box-shadow var(--t-fast),
-    outline-color var(--t-fast),
-    background-color var(--t-fast),
-    translateY var(--t-fast),
-    transform var(--t-fast),
-    border var(--t-fast),
-    scale var(--t-fast);
+  transition: var(--u-transition), scale var(--t-fast);
 }
 
 

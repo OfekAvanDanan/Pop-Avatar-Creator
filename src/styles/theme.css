@@ -37,15 +37,16 @@
   --font-regular: 700;
   --font-bold: 900;
 
-  --U-transition: transform --t-fast,
-    box-shadow --t-fast,
-    outline-color --t-fast,
-    background-color --t-fast;
+  /* Shared transition tokens */
+  --u-transition: transform var(--t-fast),
+    box-shadow var(--t-fast),
+    outline-color var(--t-fast),
+    background-color var(--t-fast);
 }
 
 /* Transitions & motion */
 .u-transition {
-  transition: var(--U-transition);
+  transition: var(--u-transition);
 }
 
 @keyframes fade-in {

@@ -144,9 +144,9 @@
   font-weight: 800;
   padding: 12px 20px;
   border-radius: var(--r-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
   cursor: pointer;
-  transition: var(--U-transition);
+  transition: var(--u-transition);
 }
 
 .save-btn:hover {
