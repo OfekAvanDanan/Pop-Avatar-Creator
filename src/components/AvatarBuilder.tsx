@@ -206,7 +206,6 @@ export default function AvatarBuilder() {
                     onClick={() => setCfg((x) => ({ ...x, clothingType: n }))}
                   >
                     <Avatar
-                      key={`cloth-${n}-${cfg.skinColor}-${cfg.bodyColor}-${cfg.hairColor}-${cfg.bgColor}-${cfg.glasses}-${cfg.faceTexture}-${cfg.centerClothing}-${cfg.rightClothing}-${cfg.leftClothing}`}
                       config={{ ...cfg, clothingType: n }}
                       width="100%"
                       height="100%"

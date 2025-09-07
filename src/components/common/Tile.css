@@ -1,7 +1,7 @@
 .tile {
   background: var(--tile-bg);
   border-radius: var(--r-md);
-  border: 2px solid var(--outline);
+  border: var(--bd-1) solid var(--outline);
   box-shadow: var(--shadow);
   padding: 0;
   overflow: hidden;
@@ -9,25 +9,25 @@
   position: relative;
   scale: 0.96;
   transition:
-    box-shadow 120ms ease,
-    outline-color 120ms ease,
-    background-color 120ms ease,
-    translateY 120ms ease-in-out,
-    transform 120ms ease-in-out,
-    border 120ms ease-in-out,
-    scale 120ms ease-in-out;
+    box-shadow var(--t-fast),
+    outline-color var(--t-fast),
+    background-color var(--t-fast),
+    translateY var(--t-fast),
+    transform var(--t-fast),
+    border var(--t-fast),
+    scale var(--t-fast);
 }
 
 
 
 .tile.selected {
-  border: 4px solid var(--outline);
+  border: var(--bd-2) solid var(--outline);
   box-shadow: var(--shadow);
   scale: 0.96;
 }
 
 .tile:hover {
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: var(--shadow-strong);
   scale: 0.95;
   transform: translateY(-3px);
 }
@@ -41,5 +41,5 @@
   width: 100%;
   height: 100%;
   display: block;
-  animation: fade-in 160ms ease;
+  animation: fade-in 250ms, fade-out 250ms ease;
 }

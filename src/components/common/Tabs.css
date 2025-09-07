@@ -11,14 +11,14 @@
     font-size: 14px;
     padding: 6px 10px;
     border-radius: var(--r-md);
-    border: 2px solid transparent;
+    border: var(--bd-1) solid transparent;
     cursor: pointer;
     color: var(--ink);
     box-shadow: none;
     outline: none;
     position: relative;
     top: 0;
-    transition: background-color 120ms ease, color 120ms ease, transform 120ms ease;
+    transition: background-color var(--t-fast), color var(--t-fast), transform var(--t-fast);
 }
 
 .tab.active {
@@ -32,6 +32,6 @@
 }
 
 .tab:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: var(--bd-1) solid var(--primary);
     outline-offset: 2px;
 }

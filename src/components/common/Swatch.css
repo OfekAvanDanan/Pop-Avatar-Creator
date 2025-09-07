@@ -2,11 +2,10 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 2px solid var(--outline);
-  box-shadow: 0 3px 0 var(--ink);
-  transition: transform 120ms ease;
+  border: var(--bd-1) solid var(--outline);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--t-fast);
 }
-.swatch.selected { outline: 3px solid var(--primary); }
+.swatch.selected { outline: var(--bd-3) solid var(--primary); }
 .swatch:hover { transform: translateY(-1px); }
-.swatch:focus-visible { outline: 3px solid var(--primary-strong); outline-offset: 2px; }
-
+.swatch:focus-visible { outline: var(--bd-3) solid var(--primary-strong); outline-offset: 2px; }

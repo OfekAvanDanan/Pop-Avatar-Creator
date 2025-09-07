@@ -8,14 +8,29 @@
   --tile-bg: #FAEFF4;
   --muted: #88767E;
   --outline: #16070E;
+  /* Shadows */
   --shadow: 4px 4px 0 var(--ink);
+  --shadow-md: 5px 5px 0 var(--ink);
   --shadow-strong: 6px 6px 0 var(--ink);
+  --shadow-xl: 7px 7px 0 var(--ink);
+  --shadow-soft: 0 3px 0 var(--ink);
+  /* Text shadows */
+  --text-shadow-1: 0 3px 0 var(--ink);
+  /* Radii */
   --r-sm: 12px;
   --r-md: 16px;
   --r-lg: 24px;
+  /* Spacing scale */
   --space: 12px;
   --space-sm: 8px;
   --space-lg: 16px;
+  --space-xs: 6px;
+  /* Borders */
+  --bd-1: 2px;
+  --bd-2: 4px;
+  --bd-3: 3px;
+  /* Motion */
+  --t-fast: 120ms ease;
 }
 
 /* Transitions & motion */
@@ -65,6 +80,15 @@
 
 .u-shadow-2 {
   box-shadow: var(--shadow-strong);
+}
+
+/* Utilities: borders */
+.u-border-1 {
+  border: var(--bd-1) solid var(--outline);
+}
+
+.u-border-2 {
+  border: var(--bd-2) solid var(--outline);
 }
 
 /* Utilities: colors */

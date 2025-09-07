@@ -5,7 +5,7 @@
   height: 900px;
   margin: 0 auto;
   background: var(--panel);
-  border: 2px solid var(--outline);
+  border: var(--bd-1) solid var(--outline);
   border-radius: var(--r-md);
   overflow: hidden;
   box-shadow: var(--shadow-strong);
@@ -26,7 +26,7 @@
   font-size: 32px;
   font-weight: 800;
   color: #fff;
-  text-shadow: 0 3px 0 var(--ink);
+  text-shadow: var(--text-shadow-1);
   z-index: 2;
 }
 
@@ -36,7 +36,7 @@
   height: 100%;
   overflow: hidden;
   background: transparent;
-  animation: fade-in 200ms ease;
+  animation: fade-in 250ms, fade-out 250ms ease;
   z-index: 1;
 }
 
@@ -48,7 +48,7 @@
   width: 100%;
   padding: 12px 16px;
   border-radius: var(--r-lg);
-  border: 2px solid var(--outline);
+  border: var(--bd-1) solid var(--outline);
   box-shadow: var(--shadow);
   outline: none;
   font-size: 14px;
@@ -69,7 +69,7 @@
   justify-content: center;
   gap: 15px;
   margin-bottom: 12px;
-  animation: fade-in 160ms ease;
+  animation: fade-in 250ms, fade-out 250ms ease;
 }
 
 
@@ -82,7 +82,7 @@
 /* Horizontal scroller for selections */
 .hscroll {
   display: flex;
-  gap: 12px;
+  gap: var(--space);
   overflow-x: auto;
   padding-bottom: 6px;
   scroll-snap-type: x proximity;
@@ -103,9 +103,9 @@
 
 /* show exactly 6 tiles in view */
 .hscroll .tile {
-  flex: 0 0 calc((100% - 5 * 12px) / 6);
+  flex: 0 0 calc((100% - 5 * var(--space)) / 6);
   scroll-snap-align: start;
-  animation: fade-in 180ms ease;
+  animation: fade-in 250ms, fade-out 250ms ease;
 }
 
 
@@ -132,7 +132,7 @@
 .save-row {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: var(--space-lg);
 }
 
 .save-btn {
@@ -142,17 +142,17 @@
   font-weight: 800;
   padding: 12px 20px;
   border-radius: var(--r-lg);
-  box-shadow: 5px 5px 0 var(--ink);
+  box-shadow: var(--shadow-md);
   cursor: pointer;
-  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+  transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
 }
 
 .save-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 7px 7px 0 var(--ink);
+  box-shadow: var(--shadow-xl);
 }
 
 .save-btn:active {
   transform: translateY(0);
-  box-shadow: 7px 7px 0 var(--ink);
+  box-shadow: var(--shadow-xl);
 }
