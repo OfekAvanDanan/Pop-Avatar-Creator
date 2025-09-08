@@ -54,7 +54,7 @@
   margin-bottom: -40px;
   height: 35px;
   filter:
-    drop-shadow(0.05px 0 var(--ink)) drop-shadow(-0.05px 0 var(--ink)) drop-shadow(0 -0.05px var(--ink)) drop-shadow(0 0.05px var(--ink)) drop-shadow(3px 3px 0 var(--ink)) drop-shadow(6px 6px 0 var(--ink-weak));
+    drop-shadow(0.05px 0 var(--ink)) drop-shadow(-0.05px 0 var(--ink)) drop-shadow(0 -0.05px var(--ink)) drop-shadow(0 0.05px var(--ink)) drop-shadow(3px 3px 0 var(--ink)) drop-shadow(3px 3px 0 var(--ink-weak));
 }
 
 
