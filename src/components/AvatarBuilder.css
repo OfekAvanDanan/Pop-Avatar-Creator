@@ -64,7 +64,7 @@
   align-items: center;
   position: absolute;
   width: 100%;
-  top: 15px;
+  top: 35px;
   text-align: center;
 
   z-index: 4;
@@ -248,7 +248,7 @@
 
   .builder-title {
     width: 80%;
-    transform: translateY(100px);
+    transform: translateY(10dvh);
   }
 
   .ofek-logo {
@@ -275,26 +275,33 @@
 }
 
 /* Narrower phones (≤440px) — only actual changes from the 560px block */
-@media (max-width: 440px) {
+@media (max-width: 400px) {
+  .builder-root {
+    height: 100dvh;
+  }
+
+  .builder-title {
+    transform: translateY(5dvw);
+  }
 
   .builder-hero {
-    height: 120dvw;
-    --arc-top: -186dvw;
+    height: 100dvw;
+    --arc-top: -190dvw;
   }
 }
 
 /* Smallest phones (≤426px) — only actual changes */
-@media (max-width: 426px) {
+@media (max-width: 325px) {
 
   .builder-hero {
-    height: 100dvw;
     --arc-radius: 140dvw;
     --arc-top: -180dvw;
   }
 
   .builder-title {
-    transform: translateY(80px);
+    transform: translateY(0dvw);
   }
+
 
   .builder-preview .avatar {
     transform: scale(var(--avatar-scale, 0.87)) translateY(25dvw);
