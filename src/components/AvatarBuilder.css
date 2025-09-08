@@ -47,19 +47,22 @@
   /* behind avatar */
 }
 
+.ofek-logo {
+  position: relative;
+  margin-bottom: -40px;
+  height: 35px;
+  filter:
+    drop-shadow(0.05px 0 var(--ink)) drop-shadow(-0.05px 0 var(--ink)) drop-shadow(0 -0.05px var(--ink)) drop-shadow(0 0.05px var(--ink)) drop-shadow(3px 3px 0 var(--ink)) drop-shadow(6px 6px 0 var(--ink-weak));
+}
+
+
 .builder-title {
   position: absolute;
   width: 100%;
-  top: 16px;
+  top: 5px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 37pt;
-  line-height: 1;
-  font-weight: 400;
-  color: var(--panel);
-  text-shadow: var(--text-outline), var(--shadow-strong);
-  letter-spacing: 1px;
-  font-family: "duckie", sans-serif;
+
   z-index: 4;
   pointer-events: none;
 }
@@ -276,6 +279,33 @@
 
   .builder-preview .avatar {
     transform: scale(var(--avatar-scale, 1)) translateY(6dvw);
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .builder-hero {
+    height: 100dvw;
+    aspect-ratio: 1 / 1;
+    /* Mobile-tuned arc */
+    --arc-radius: 140dvw;
+    --arc-top: -180dvw;
+    overflow: visible;
+  }
+
+  .title-text {
+    font-size: 30pt;
+  }
+
+  .ofek-logo {
+    height: 25px;
+    margin-bottom: -30px;
+  }
+
+
+  .builder-preview .avatar {
+    transform: scale(var(--avatar-scale, 0.9)) translateY(19dvw);
   }
 
 }

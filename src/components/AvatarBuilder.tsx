@@ -19,6 +19,7 @@ import Tabs from "./common/Tabs";
 import Swatch from "./common/Swatch";
 import Tile from "./common/Tile";
 import { SKIN_COLORS, CLOTH_COLORS, HAIR_COLORS, BG_COLORS } from "../styles/palette";
+import ofekLogo from "../Assets/logo/Logo.svg";
 
 type Tab = "Face" | "Hair" | "Clothing" | "Details" | "Background";
 
@@ -103,7 +104,10 @@ export default function AvatarBuilder() {
         className="builder-hero"
         style={{ ["--hero-bg" as unknown as string]: cfg.bgColor || "#E72787" } as React.CSSProperties}
       >
-        <div className="builder-title">Pop Avatar Creator</div>
+        <div className="builder-title">
+          <img className="ofek-logo" src={ofekLogo} alt="Ofek Logo" />
+          <h1 className="title-text"> Pop Avatar Creator</h1>
+        </div>
         <div className="builder-preview">
           <Avatar config={cfg} hideBackground cover={true} width="100%" height="100%" />
         </div>

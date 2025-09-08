@@ -11,10 +11,10 @@
     left: 0;
     top: 0;
     border-radius: var(--r-md);
-    transition: transform 300ms ease-in-out, width var(--t-slow), height var(--t-slow), background-color var(--t-slow);
+    transition: var(--u-transition);
+    transition: transform 250ms ease-in-out, width var(--t-slow), height var(--t-slow), background-color var(--t-slow);
     z-index: 0;
     pointer-events: none;
-    transition: var(--u-transition);
     box-shadow: var(--shadow);
 }
 

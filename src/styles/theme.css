@@ -15,8 +15,7 @@
   --transform-shadow: translate(-2px, -2px);
   --border: var(--bd-1) solid var(--outline);
 
-  /* Text shadows */
-  --text-shadow-1: 0 3px 0 var(--ink);
+
 
   /*Text Outlines*/
   --text-outline: 1px 0 var(--ink),
@@ -59,6 +58,18 @@
 /* Transitions & motion */
 .u-transition {
   transition: var(--u-transition);
+}
+
+
+
+.title-text {
+  line-height: 0.85;
+  font-weight: 400;
+  font-size: 37pt;
+  color: var(--panel);
+  text-shadow: var(--text-outline), var(--shadow-strong);
+  letter-spacing: 1px;
+  font-family: "duckie", sans-serif;
 }
 
 @keyframes fade-in {
