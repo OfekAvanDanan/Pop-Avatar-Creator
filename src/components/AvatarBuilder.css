@@ -7,7 +7,10 @@
   background: var(--panel);
   border: var(--border);
   border-radius: var(--r-md);
-  overflow: hidden;
+  /* Allow vertical scrolling; keep horizontal clipped */
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: var(--shadow-strong);
 
 }
@@ -226,23 +229,25 @@
 
   .builder-root {
     width: 100dvw;
-    height: 100dvh;
+    height: 120dvh;
     margin: 0;
     border: none;
     border-radius: 0;
     box-shadow: none;
+
   }
 
   .builder-title {
     width: 80%;
+    transform: translateY(100px);
   }
 
   .builder-hero {
-    height: 95dvw;
+    height: 120dvw;
     aspect-ratio: 1 / 1;
     /* Mobile-tuned arc */
-    --arc-radius: 140dvw;
-    --arc-top: -185dvw;
+    --arc-radius: 145dvw;
+    --arc-top: -170dvw;
     overflow: visible;
   }
 
@@ -252,7 +257,7 @@
   }
 
   .container-tilesnswatches {
-    height: 80vw;
+    height: auto;
   }
 
   .builder-preview {
@@ -262,7 +267,7 @@
   }
 
   .builder-preview .avatar {
-    transform: scale(var(--avatar-scale, 1)) translateY(6dvw);
+    transform: scale(var(--avatar-scale, 1)) translateY(15dvw);
   }
 
 }
@@ -275,12 +280,13 @@
     /* Mobile-tuned arc */
     --arc-radius: 140dvw;
     --arc-top: -180dvw;
-    overflow: visible;
   }
 
   .title-text {
     font-size: 30pt;
   }
+
+  .builder-title {}
 
   .ofek-logo {
     height: 25px;
