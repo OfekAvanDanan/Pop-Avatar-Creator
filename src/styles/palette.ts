@@ -19,7 +19,7 @@ export const COLOR_MAP: Record<string, string> = {
   WH: '#F2DFE8', // Off-white / Rose
   DB: '#3c2415', // Dark Brown
   LB: '#95592eff', // Light/Medium Brown
-  OR: '#cc4c1aff', // Orange/Brown
+  OR: '#e2731eff', // Orange/Brown
   GY: '#91948cff', // Gray
 };
 
@@ -35,6 +35,9 @@ export const SKIN_COLORS = ['SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG'];
 export const CLOTH_COLORS = ['PK','BL','YE','RD','GN','BK','WH',];
 export const HAIR_COLORS = ['BK', 'DB', 'LB', 'YE', 'OR', 'GY', 'PK'];
 export const BG_COLORS = ['PK','BL','YE','RD','GN','BK','WH',];
+
+// Feature flags / configuration
+export const ENABLE_BG_ANTI_COLLISION = true;
 
 // Export a single object for convenience (still arrays of codes)
 export const PALETTE = {

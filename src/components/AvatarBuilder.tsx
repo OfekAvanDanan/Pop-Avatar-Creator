@@ -18,8 +18,8 @@ import ColumnPager from "./common/ColumnPager";
 import Tabs from "./common/Tabs";
 import Swatch from "./common/Swatch";
 import Tile from "./common/Tile";
-import { SKIN_COLORS, CLOTH_COLORS, HAIR_COLORS, BG_COLORS, toHex } from "../styles/palette";
-import ofekLogo from "../Assets/logo/Logo.svg";
+import { SKIN_COLORS, CLOTH_COLORS, HAIR_COLORS, BG_COLORS, toHex, ENABLE_BG_ANTI_COLLISION } from "../styles/palette";
+import ofekLogo from "../Assets/logo/AvatarCreator.svg";
 import Button from "./common/Button";
 
 type Tab = "Face" | "Hair" | "Clothing" | "Details" | "Background";
@@ -106,8 +106,7 @@ export default function AvatarBuilder() {
         style={{ ["--hero-bg" as unknown as string]: toHex(cfg.bgColor) || "#E72787" } as React.CSSProperties}
       >
         <div className="builder-title">
-          <img className="ofek-logo" src={ofekLogo} alt="Ofek Logo" />
-          <h1 className="title-text"> Pop Avatar Creator</h1>
+          <img className="avatarCreator-logo" src={ofekLogo} alt="Ofek Logo" />
         </div>
         <div className="builder-preview">
           <Avatar config={cfg} hideBackground cover={true} width="100%" height="100%" />
@@ -167,7 +166,7 @@ export default function AvatarBuilder() {
                         const currentBgHex = (toHex(prev.bgColor) || "").toLowerCase();
                         const bodyHex = (toHex(prev.bodyColor) || "").toLowerCase();
                         let nextBg = prev.bgColor;
-                        if (selectedHex && currentBgHex && selectedHex === currentBgHex) {
+                        if (ENABLE_BG_ANTI_COLLISION && selectedHex && currentBgHex && selectedHex === currentBgHex) {
                           const candidates = BG_COLORS.filter((b) => {
                             const bh = (toHex(b) || "").toLowerCase();
                             return bh !== selectedHex && (!!bodyHex ? bh !== bodyHex : true);
@@ -227,7 +226,7 @@ export default function AvatarBuilder() {
                         const currentBgHex = (toHex(prev.bgColor) || "").toLowerCase();
                         const hairHex = (toHex(prev.hairColor) || "").toLowerCase();
                         let nextBg = prev.bgColor;
-                        if (selectedHex && currentBgHex && selectedHex === currentBgHex) {
+                        if (ENABLE_BG_ANTI_COLLISION && selectedHex && currentBgHex && selectedHex === currentBgHex) {
                           const candidates = BG_COLORS.filter((b) => {
                             const bh = (toHex(b) || "").toLowerCase();
                             return bh !== selectedHex && (!!hairHex ? bh !== hairHex : true);
@@ -307,12 +306,15 @@ export default function AvatarBuilder() {
 
           {tab === "Background" && (
             <ColumnPager>
-              {BG_COLORS.filter((b) => {
-                const bh = (toHex(b) || "").toLowerCase();
-                const bodyH = (toHex(cfg.bodyColor) || "").toLowerCase();
-                const hairH = (toHex(cfg.hairColor) || "").toLowerCase();
-                return bh !== bodyH && bh !== hairH;
-              }).map((c) => (
+              {(ENABLE_BG_ANTI_COLLISION
+                ? BG_COLORS.filter((b) => {
+                    const bh = (toHex(b) || "").toLowerCase();
+                    const bodyH = (toHex(cfg.bodyColor) || "").toLowerCase();
+                    const hairH = (toHex(cfg.hairColor) || "").toLowerCase();
+                    return bh !== bodyH && bh !== hairH;
+                  })
+                : BG_COLORS
+              ).map((c) => (
                 <Tile
                   key={`bg-${c}`}
                   selected={(toHex(cfg.bgColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}

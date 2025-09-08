@@ -50,11 +50,9 @@
   /* behind avatar */
 }
 
-.ofek-logo {
-  margin-bottom: -40px;
-  height: 35px;
-  filter:
-    drop-shadow(0.05px 0 var(--ink)) drop-shadow(-0.05px 0 var(--ink)) drop-shadow(0 -0.05px var(--ink)) drop-shadow(0 0.05px var(--ink)) drop-shadow(3px 3px 0 var(--ink)) drop-shadow(3px 3px 0 var(--ink-weak));
+.avatarCreator-logo {
+  height: 120px;
+  transform: translateY(-10px);
 }
 
 
@@ -251,9 +249,8 @@
     width: 80%;
   }
 
-  .ofek-logo {
-    height: 25px;
-    margin-bottom: -40px;
+  .avatarCreator-logo {
+    height: 25dvw;
   }
 
   .title-text {
@@ -279,12 +276,6 @@
   .builder-root {
     height: 100dvh;
   }
-
-  .ofek-logo {
-    height: 25px;
-    margin-bottom: -25px;
-  }
-
 
 
   .title-text {

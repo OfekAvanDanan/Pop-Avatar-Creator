@@ -71,7 +71,6 @@
   color: var(--panel);
   text-shadow: var(--text-outline), var(--shadow-strong);
   letter-spacing: 1px;
-  font-family: "duckie", sans-serif;
 }
 
 @keyframes fade-in {
