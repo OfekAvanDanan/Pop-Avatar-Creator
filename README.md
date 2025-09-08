@@ -1,4 +1,7 @@
-![alt text](public/logo512.png)
+<p align="center">
+  <img src="public/logo512.png" alt="Logo" width="200"/>
+</p>
+
 # Pop Avatar Creator
 An SVG-based avatar builder with selectable parts, color palettes, and a compact configuration string you can save and reuse.
 
