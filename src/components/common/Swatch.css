@@ -11,6 +11,7 @@
 .swatch.selected {
   box-shadow: var(--shadow);
   border: var(--bd-2) solid var(--outline);
+  scale: 1.1;
 }
 
 .swatch:hover {

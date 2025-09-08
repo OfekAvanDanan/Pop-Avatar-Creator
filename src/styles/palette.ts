@@ -10,13 +10,13 @@ export const COLOR_MAP: Record<string, string> = {
   SF: '#7A3D28',
   SG: '#603020',
   // Common colors
-  YE: '#EFB108', // Yellow/Gold
-  BK: '#0E0107', // Black
   PK: '#E62786', // Pink/Magenta
-  RD: '#CA0D0E', // Red
-  WH: '#F2DFE8', // Off-white / Rose
   BL: '#0096E0', // Blue
+  YE: '#EFB108', // Yellow/Gold
+  RD: '#CA0D0E', // Red
   GN: '#178F2F', // Green
+  BK: '#0E0107', // Black
+  WH: '#F2DFE8', // Off-white / Rose
   DB: '#3c2415', // Dark Brown
   LB: '#95592eff', // Light/Medium Brown
   OR: '#cc4c1aff', // Orange/Brown
@@ -32,9 +32,9 @@ export function toHex(codeOrHex?: string): string | undefined {
 
 // Category palettes now contain two-letter color codes
 export const SKIN_COLORS = ['SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG'];
-export const CLOTH_COLORS = ['YE', 'BK', 'PK', 'RD', 'WH', 'BL', 'GN'];
+export const CLOTH_COLORS = ['PK','BL','YE','RD','GN','BK','WH',];
 export const HAIR_COLORS = ['BK', 'DB', 'LB', 'YE', 'OR', 'GY', 'PK'];
-export const BG_COLORS = ['YE', 'BK', 'PK', 'RD', 'WH', 'BL', 'GN'];
+export const BG_COLORS = ['PK','BL','YE','RD','GN','BK','WH',];
 
 // Export a single object for convenience (still arrays of codes)
 export const PALETTE = {

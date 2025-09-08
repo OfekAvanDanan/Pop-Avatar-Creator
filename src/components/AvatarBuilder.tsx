@@ -51,12 +51,12 @@ export default function AvatarBuilder() {
 
   const [cfg, setCfg] = React.useState<AvatarConfig>({
     bgColor: BG_COLORS[0],
-    bodyColor: CLOTH_COLORS[0],
-    skinColor: SKIN_COLORS[1],
+    bodyColor: CLOTH_COLORS[1],
+    skinColor: SKIN_COLORS[2],
     hairColor: HAIR_COLORS[0],
     faceType: faceOptions[0] ?? 1,
     hairType: hairOptions[0] ?? 1,
-    clothingType: clothingOptions[0] ?? 1,
+    clothingType: clothingOptions[1] ?? 1,
     glasses: 0,
   });
 
@@ -134,7 +134,7 @@ export default function AvatarBuilder() {
                   <Swatch
                     key={c}
                     color={toHex(c) as string}
-                    selected={(toHex(cfg.skinColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
+                    selected={(toHex(cfg.skinColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
                     onClick={() => setCfg((x) => ({ ...x, skinColor: c }))}
                   />
                 ))}
@@ -160,16 +160,16 @@ export default function AvatarBuilder() {
                   <Swatch
                     key={c}
                     color={toHex(c) as string}
-                    selected={(toHex(cfg.hairColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
+                    selected={(toHex(cfg.hairColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
                     onClick={() =>
                       setCfg((prev) => {
-                        const selectedHex = (toHex(c) || '').toLowerCase();
-                        const currentBgHex = (toHex(prev.bgColor) || '').toLowerCase();
-                        const bodyHex = (toHex(prev.bodyColor) || '').toLowerCase();
+                        const selectedHex = (toHex(c) || "").toLowerCase();
+                        const currentBgHex = (toHex(prev.bgColor) || "").toLowerCase();
+                        const bodyHex = (toHex(prev.bodyColor) || "").toLowerCase();
                         let nextBg = prev.bgColor;
                         if (selectedHex && currentBgHex && selectedHex === currentBgHex) {
                           const candidates = BG_COLORS.filter((b) => {
-                            const bh = (toHex(b) || '').toLowerCase();
+                            const bh = (toHex(b) || "").toLowerCase();
                             return bh !== selectedHex && (!!bodyHex ? bh !== bodyHex : true);
                           });
                           if (candidates.length > 0) {
@@ -220,16 +220,16 @@ export default function AvatarBuilder() {
                   <Swatch
                     key={c}
                     color={toHex(c) as string}
-                    selected={(toHex(cfg.bodyColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
+                    selected={(toHex(cfg.bodyColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
                     onClick={() =>
                       setCfg((prev) => {
-                        const selectedHex = (toHex(c) || '').toLowerCase();
-                        const currentBgHex = (toHex(prev.bgColor) || '').toLowerCase();
-                        const hairHex = (toHex(prev.hairColor) || '').toLowerCase();
+                        const selectedHex = (toHex(c) || "").toLowerCase();
+                        const currentBgHex = (toHex(prev.bgColor) || "").toLowerCase();
+                        const hairHex = (toHex(prev.hairColor) || "").toLowerCase();
                         let nextBg = prev.bgColor;
                         if (selectedHex && currentBgHex && selectedHex === currentBgHex) {
                           const candidates = BG_COLORS.filter((b) => {
-                            const bh = (toHex(b) || '').toLowerCase();
+                            const bh = (toHex(b) || "").toLowerCase();
                             return bh !== selectedHex && (!!hairHex ? bh !== hairHex : true);
                           });
                           if (candidates.length > 0) {
@@ -308,14 +308,14 @@ export default function AvatarBuilder() {
           {tab === "Background" && (
             <ColumnPager>
               {BG_COLORS.filter((b) => {
-                const bh = (toHex(b) || '').toLowerCase();
-                const bodyH = (toHex(cfg.bodyColor) || '').toLowerCase();
-                const hairH = (toHex(cfg.hairColor) || '').toLowerCase();
+                const bh = (toHex(b) || "").toLowerCase();
+                const bodyH = (toHex(cfg.bodyColor) || "").toLowerCase();
+                const hairH = (toHex(cfg.hairColor) || "").toLowerCase();
                 return bh !== bodyH && bh !== hairH;
               }).map((c) => (
                 <Tile
                   key={`bg-${c}`}
-                  selected={(toHex(cfg.bgColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
+                  selected={(toHex(cfg.bgColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
                   onClick={() => setCfg((x) => ({ ...x, bgColor: c }))}
                 >
                   <Avatar config={{ ...cfg, bgColor: c }} width="100%" height="100%" />
