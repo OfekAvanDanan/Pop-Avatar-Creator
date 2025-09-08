@@ -13,6 +13,9 @@ import {
   rightClothingCtx,
   leftClothingCtx,
   glassesCtx,
+  eyesCtx,
+  noseCtx,
+  mouthCtx,
 } from "../lib/assetContexts";
 
 type Props = {
@@ -35,19 +38,7 @@ const GLOBAL_INFLIGHT = new Map<string, Promise<string>>();
 
 // Direct require.context calls were moved to src/lib/assetContexts for modularity
 
-// Optional/Not available yet; keep stubs for future
-let eyesCtx: ((k: string) => string) | null = null;
-let noseCtx: ((k: string) => string) | null = null;
-let mouthCtx: ((k: string) => string) | null = null;
-try {
-  eyesCtx = require.context("../Assets/10_Eyes", false, /\.\/Eyes_\d+\.svg$/);
-} catch {}
-try {
-  noseCtx = require.context("../Assets/11_Nose", false, /\.\/Nose_\d+\.svg$/);
-} catch {}
-try {
-  mouthCtx = require.context("../Assets/12_Mouth", false, /\.\/Mouth_\d+\.svg$/);
-} catch {}
+// Eyes/Nose/Mouth contexts are provided (optionally) via lib/assetContexts
 
 // Single Body asset
 const bodyUrl = (() => {

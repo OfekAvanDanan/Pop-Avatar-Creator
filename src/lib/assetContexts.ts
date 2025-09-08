@@ -12,4 +12,7 @@ export const centerClothingCtx = require.context('../Assets/AvatarAssets/6_Cente
 export const rightClothingCtx = require.context('../Assets/AvatarAssets/7_Right_Clothing', false, /\.\/RightClothing_\d+\.svg$/);
 export const leftClothingCtx = require.context('../Assets/AvatarAssets/8_Left_Clothing', false, /\.\/LeftClothing_\d+\.svg$/);
 export const glassesCtx = require.context('../Assets/AvatarAssets/13_Glasses', false, /\.\/Glasses_\d+\.svg$/);
-
+// Optional parts: eyes, nose, mouth (folders may be empty but exist)
+export const eyesCtx = require.context('../Assets/AvatarAssets/10_Eyes', false, /\.\/Eyes_\d+\.svg$/);
+export const noseCtx = require.context('../Assets/AvatarAssets/11_Nose', false, /\.\/Nose_\d+\.svg$/);
+export const mouthCtx = require.context('../Assets/AvatarAssets/12_Mouth', false, /\.\/Mouth_\d+\.svg$/);
