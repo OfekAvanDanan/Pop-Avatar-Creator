@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/Pop-Avatar-Creator/static/css/main.fb641db6.css",
-    "main.js": "/Pop-Avatar-Creator/static/js/main.698844a2.js",
+    "main.css": "/Pop-Avatar-Creator/static/css/main.00b9ad2f.css",
+    "main.js": "/Pop-Avatar-Creator/static/js/main.d86d70e3.js",
     "static/js/453.b7b2e9a2.chunk.js": "/Pop-Avatar-Creator/static/js/453.b7b2e9a2.chunk.js",
-    "static/media/Logo.svg": "/Pop-Avatar-Creator/static/media/Logo.358f91a0472abc74075f2001cbb4af31.svg",
+    "static/media/AvatarCreator.svg": "/Pop-Avatar-Creator/static/media/AvatarCreator.ff6ce00c6fbc1016959ebe5244f28e9e.svg",
     "static/media/Hair_005_1.svg": "/Pop-Avatar-Creator/static/media/Hair_005_1.e592fb4c972a11cbd394.svg",
     "static/media/Face_1.svg": "/Pop-Avatar-Creator/static/media/Face_1.a4bd7b06118c48447c40.svg",
     "static/media/Hair_006_1.svg": "/Pop-Avatar-Creator/static/media/Hair_006_1.93e172be60889fcc105f.svg",
@@ -16,8 +16,8 @@
     "static/media/Face_5.svg": "/Pop-Avatar-Creator/static/media/Face_5.2a0dc0c680dd303efe16.svg",
     "static/media/Face_2.svg": "/Pop-Avatar-Creator/static/media/Face_2.2943bb5d7a7330cb004b.svg",
     "static/media/Face_4.svg": "/Pop-Avatar-Creator/static/media/Face_4.32b5a2832aae9ad19c0e.svg",
-    "index.html": "/Pop-Avatar-Creator/index.html",
     "static/media/Face_8.svg": "/Pop-Avatar-Creator/static/media/Face_8.278a18fdbb2ee6b8e00f.svg",
+    "index.html": "/Pop-Avatar-Creator/index.html",
     "static/media/Hair_105_1.svg": "/Pop-Avatar-Creator/static/media/Hair_105_1.e7d0d5306a3162f329b8.svg",
     "static/media/Hair_006_0.svg": "/Pop-Avatar-Creator/static/media/Hair_006_0.86564d2c2250868a2f1e.svg",
     "static/media/Hair_103_0.svg": "/Pop-Avatar-Creator/static/media/Hair_103_0.43cb2b69a5edbd0d1810.svg",
@@ -54,12 +54,12 @@
     "static/media/Hair_002_0.svg": "/Pop-Avatar-Creator/static/media/Hair_002_0.f80b9e525e0753b3559e.svg",
     "static/media/Hair_105_0.svg": "/Pop-Avatar-Creator/static/media/Hair_105_0.cdf9222a74865af4748a.svg",
     "static/media/CenterClothing_2.svg": "/Pop-Avatar-Creator/static/media/CenterClothing_2.00fcb771385c6def00bf.svg",
-    "main.fb641db6.css.map": "/Pop-Avatar-Creator/static/css/main.fb641db6.css.map",
-    "main.698844a2.js.map": "/Pop-Avatar-Creator/static/js/main.698844a2.js.map",
+    "main.00b9ad2f.css.map": "/Pop-Avatar-Creator/static/css/main.00b9ad2f.css.map",
+    "main.d86d70e3.js.map": "/Pop-Avatar-Creator/static/js/main.d86d70e3.js.map",
     "453.b7b2e9a2.chunk.js.map": "/Pop-Avatar-Creator/static/js/453.b7b2e9a2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb641db6.css",
-    "static/js/main.698844a2.js"
+    "static/css/main.00b9ad2f.css",
+    "static/js/main.d86d70e3.js"
   ]
 }
