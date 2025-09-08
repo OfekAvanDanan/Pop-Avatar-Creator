@@ -217,34 +217,28 @@
   margin-top: var(--space-lg);
 }
 
-/* button styles moved to common/Button.css */
-
-/* Responsive: full-bleed layout on small screens */
-@media (max-width: 580px) {
-
-  /* Remove outer padding from app wrapper (overrides inline) */
+/* Base mobile (≤560px) — full set of properties */
+/* Notes inside the code are in English */
+@media (max-width: 560px) {
   .App {
+    /* keep only once at the widest mobile breakpoint */
     padding: 0 !important;
   }
 
   .builder-root {
     width: 100dvw;
-    height: 120dvh;
     margin: 0;
     border: none;
     border-radius: 0;
     box-shadow: none;
-
+    overflow-y: scroll;
   }
 
-
-
   .builder-hero {
-    height: 120dvw;
+    height: 150dvw;
     aspect-ratio: 1 / 1;
-    /* Mobile-tuned arc */
     --arc-radius: 145dvw;
-    --arc-top: -170dvw;
+    --arc-top: -187dvw;
     overflow: visible;
   }
 
@@ -273,21 +267,27 @@
   .builder-preview {
     transform: translateY(0.4vh);
     width: 80%;
-
   }
 
   .builder-preview .avatar {
     transform: scale(var(--avatar-scale, 1)) translateY(15dvw);
   }
-
 }
 
-@media (max-width: 380px) {
+/* Narrower phones (≤440px) — only actual changes from the 560px block */
+@media (max-width: 440px) {
+
+  .builder-hero {
+    height: 120dvw;
+    --arc-top: -186dvw;
+  }
+}
+
+/* Smallest phones (≤426px) — only actual changes */
+@media (max-width: 426px) {
 
   .builder-hero {
     height: 100dvw;
-    aspect-ratio: 1 / 1;
-    /* Mobile-tuned arc */
     --arc-radius: 140dvw;
     --arc-top: -180dvw;
   }
@@ -299,5 +299,4 @@
   .builder-preview .avatar {
     transform: scale(var(--avatar-scale, 0.87)) translateY(25dvw);
   }
-
 }
