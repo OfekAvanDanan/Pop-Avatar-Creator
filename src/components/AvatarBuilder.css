@@ -237,10 +237,7 @@
 
   }
 
-  .builder-title {
-    width: 80%;
-    transform: translateY(100px);
-  }
+
 
   .builder-hero {
     height: 120dvw;
@@ -252,8 +249,21 @@
   }
 
   .builder-body {
-    padding: 5vw;
-    /* tighter padding for mobile */
+    padding: 10px;
+  }
+
+  .builder-title {
+    width: 80%;
+    transform: translateY(100px);
+  }
+
+  .ofek-logo {
+    height: 25px;
+    margin-bottom: -36px;
+  }
+
+  .title-text {
+    font-size: 28pt;
   }
 
   .container-tilesnswatches {
@@ -282,20 +292,12 @@
     --arc-top: -180dvw;
   }
 
-  .title-text {
-    font-size: 30pt;
+  .builder-title {
+    transform: translateY(80px);
   }
-
-  .builder-title {}
-
-  .ofek-logo {
-    height: 25px;
-    margin-bottom: -30px;
-  }
-
 
   .builder-preview .avatar {
-    transform: scale(var(--avatar-scale, 0.9)) translateY(19dvw);
+    transform: scale(var(--avatar-scale, 0.87)) translateY(25dvw);
   }
 
 }
