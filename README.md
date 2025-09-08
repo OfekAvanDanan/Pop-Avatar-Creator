@@ -1,5 +1,5 @@
 ![alt text](public/logo512.png)
-# SVG Avatar Builder
+# Pop Avatar Creator
 An SVG-based avatar builder with selectable parts, color palettes, and a compact configuration string you can save and reuse.
 
 This README explains where to add and update values, how to extend the editor with new options, and how to run the project.
