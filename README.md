@@ -1,8 +1,41 @@
+![alt text](public/logo512.png)
 # SVG Avatar Builder
-
 An SVG-based avatar builder with selectable parts, color palettes, and a compact configuration string you can save and reuse.
 
 This README explains where to add and update values, how to extend the editor with new options, and how to run the project.
+
+## Quick avatar from a string (with caching)
+
+If you only have the serialized avatar string and want a fast render (lists, chats, member chips), use the small helper that memoizes avatars across the app so identical strings don’t re-fetch or re-process assets.
+
+Component
+
+```
+import AvatarFromString from 'src/components/common/AvatarFromString';
+
+<AvatarFromString configString={"A1-H001-C5-..."} size={48} />
+```
+
+Hook
+
+```
+import { useAvatarFromString } from 'src/components/common/AvatarFromString';
+
+const node = useAvatarFromString("A1-H001-C5-...", 64);
+return <div>{node}</div>;
+```
+
+How it works
+
+- The core `Avatar` component already caches colorized SVG layers globally to avoid redundant network fetches and processing.
+- The helper adds a tiny module-level memoization (a `Map`) keyed by `configString + size + cover` and reuses the exact React element for repeated inputs.
+
+When to use it
+
+- Rendering many repeated avatars (activity feeds, comments, member lists).
+- Stateless rendering from a stored avatar string.
+
+For live editing, keep using `<Avatar config={...} />` directly.
 
 ## Run
 - `npm start` – start dev server at http://localhost:3000
@@ -74,4 +107,3 @@ The “Save Changes” button stores the value in `localStorage` and copies a re
 - Adding new colors? Update both `palette.ts` and, if needed, theme variables in `theme.css` for contrast/shadows.
 - Repeated spacing/radius/shadow? Prefer the utilities from `theme.css` over ad‑hoc CSS.
 - Scrolling: tune wheel sensitivity/threshold in `ColumnPager.tsx` if needed.
-

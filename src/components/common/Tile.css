@@ -7,7 +7,7 @@
   overflow: hidden;
   aspect-ratio: 1 / 1;
   position: relative;
-  scale: 0.96;
+  scale: 0.95;
   transition: var(--u-transition), scale var(--t-fast);
 }
 
@@ -16,18 +16,18 @@
 .tile.selected {
   border: var(--bd-2) solid var(--outline);
   box-shadow: var(--shadow);
-  scale: 0.96;
+  scale: 0.97;
 }
 
 .tile:hover {
   box-shadow: var(--shadow-strong);
-  scale: 0.95;
+  scale: 0.96;
   transform: var(--transform-shadow);
 }
 
 .tile:active {
   box-shadow: var(--shadow);
-  scale: 1;
+  scale: 0.96;
 }
 
 .tile svg {
@@ -40,6 +40,7 @@
 @media (max-width: 560px) {
   .tile {
     border-radius: var(--r-lg);
-    scale: 1; /* make tiles a bit larger on mobile */
+    scale: 1;
+    /* make tiles a bit larger on mobile */
   }
 }
