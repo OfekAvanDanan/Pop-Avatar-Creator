@@ -29,3 +29,10 @@
     height: 34px;
   }
 }
+
+@media (max-width: 325px) {
+  .swatch {
+    width: 26px;
+    height: 26px;
+  }
+}

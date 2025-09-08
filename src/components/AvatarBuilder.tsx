@@ -18,7 +18,7 @@ import ColumnPager from "./common/ColumnPager";
 import Tabs from "./common/Tabs";
 import Swatch from "./common/Swatch";
 import Tile from "./common/Tile";
-import { SKIN_COLORS, CLOTH_COLORS, HAIR_COLORS, BG_COLORS } from "../styles/palette";
+import { SKIN_COLORS, CLOTH_COLORS, HAIR_COLORS, BG_COLORS, toHex } from "../styles/palette";
 import ofekLogo from "../Assets/logo/Logo.svg";
 import Button from "./common/Button";
 
@@ -103,7 +103,7 @@ export default function AvatarBuilder() {
     <div className="builder-root">
       <div
         className="builder-hero"
-        style={{ ["--hero-bg" as unknown as string]: cfg.bgColor || "#E72787" } as React.CSSProperties}
+        style={{ ["--hero-bg" as unknown as string]: toHex(cfg.bgColor) || "#E72787" } as React.CSSProperties}
       >
         <div className="builder-title">
           <img className="ofek-logo" src={ofekLogo} alt="Ofek Logo" />
@@ -130,11 +130,11 @@ export default function AvatarBuilder() {
           {tab === "Face" && (
             <div>
               <div className="swatch-row">
-                {SKIN_COLORS.map((c) => (
+                {SKIN_COLORS.slice(0, 7).map((c) => (
                   <Swatch
                     key={c}
-                    color={c}
-                    selected={cfg.skinColor?.toLowerCase() === c.toLowerCase()}
+                    color={toHex(c) as string}
+                    selected={(toHex(cfg.skinColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
                     onClick={() => setCfg((x) => ({ ...x, skinColor: c }))}
                   />
                 ))}
@@ -156,12 +156,30 @@ export default function AvatarBuilder() {
           {tab === "Hair" && (
             <div>
               <div className="swatch-row">
-                {HAIR_COLORS.map((c) => (
+                {HAIR_COLORS.slice(0, 7).map((c) => (
                   <Swatch
                     key={c}
-                    color={c}
-                    selected={cfg.hairColor?.toLowerCase() === c.toLowerCase()}
-                    onClick={() => setCfg((x) => ({ ...x, hairColor: c }))}
+                    color={toHex(c) as string}
+                    selected={(toHex(cfg.hairColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
+                    onClick={() =>
+                      setCfg((prev) => {
+                        const selectedHex = (toHex(c) || '').toLowerCase();
+                        const currentBgHex = (toHex(prev.bgColor) || '').toLowerCase();
+                        const bodyHex = (toHex(prev.bodyColor) || '').toLowerCase();
+                        let nextBg = prev.bgColor;
+                        if (selectedHex && currentBgHex && selectedHex === currentBgHex) {
+                          const candidates = BG_COLORS.filter((b) => {
+                            const bh = (toHex(b) || '').toLowerCase();
+                            return bh !== selectedHex && (!!bodyHex ? bh !== bodyHex : true);
+                          });
+                          if (candidates.length > 0) {
+                            const idx = Math.floor(Math.random() * candidates.length);
+                            nextBg = candidates[idx];
+                          }
+                        }
+                        return { ...prev, hairColor: c, bgColor: nextBg };
+                      })
+                    }
                   />
                 ))}
               </div>
@@ -198,12 +216,30 @@ export default function AvatarBuilder() {
           {tab === "Clothing" && (
             <div>
               <div className="swatch-row">
-                {CLOTH_COLORS.map((c) => (
+                {CLOTH_COLORS.slice(0, 7).map((c) => (
                   <Swatch
                     key={c}
-                    color={c}
-                    selected={cfg.bodyColor?.toLowerCase() === c.toLowerCase()}
-                    onClick={() => setCfg((x) => ({ ...x, bodyColor: c }))}
+                    color={toHex(c) as string}
+                    selected={(toHex(cfg.bodyColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
+                    onClick={() =>
+                      setCfg((prev) => {
+                        const selectedHex = (toHex(c) || '').toLowerCase();
+                        const currentBgHex = (toHex(prev.bgColor) || '').toLowerCase();
+                        const hairHex = (toHex(prev.hairColor) || '').toLowerCase();
+                        let nextBg = prev.bgColor;
+                        if (selectedHex && currentBgHex && selectedHex === currentBgHex) {
+                          const candidates = BG_COLORS.filter((b) => {
+                            const bh = (toHex(b) || '').toLowerCase();
+                            return bh !== selectedHex && (!!hairHex ? bh !== hairHex : true);
+                          });
+                          if (candidates.length > 0) {
+                            const idx = Math.floor(Math.random() * candidates.length);
+                            nextBg = candidates[idx];
+                          }
+                        }
+                        return { ...prev, bodyColor: c, bgColor: nextBg };
+                      })
+                    }
                   />
                 ))}
               </div>
@@ -271,10 +307,15 @@ export default function AvatarBuilder() {
 
           {tab === "Background" && (
             <ColumnPager>
-              {BG_COLORS.map((c) => (
+              {BG_COLORS.filter((b) => {
+                const bh = (toHex(b) || '').toLowerCase();
+                const bodyH = (toHex(cfg.bodyColor) || '').toLowerCase();
+                const hairH = (toHex(cfg.hairColor) || '').toLowerCase();
+                return bh !== bodyH && bh !== hairH;
+              }).map((c) => (
                 <Tile
                   key={`bg-${c}`}
-                  selected={cfg.bgColor?.toLowerCase() === c.toLowerCase()}
+                  selected={(toHex(cfg.bgColor) || '').toLowerCase() === (toHex(c) || '').toLowerCase()}
                   onClick={() => setCfg((x) => ({ ...x, bgColor: c }))}
                 >
                   <Avatar config={{ ...cfg, bgColor: c }} width="100%" height="100%" />

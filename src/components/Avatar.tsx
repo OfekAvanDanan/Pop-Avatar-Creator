@@ -1,5 +1,6 @@
 import React from "react";
 import { AvatarConfig, parseAvatarString, pad3 } from "../lib/avatar";
+import { toHex } from "../styles/palette";
 // Polyfill require.context for tests before using it
 import "../polyfills/requireContext";
 import {
@@ -285,21 +286,25 @@ export function Avatar(props: Props) {
   // Apply color replacements:
   // - Face and Clothing_1: replace #e8bda7 (skin) with cfg.skinColor
   // - Body: replace #c2272d (clothing color) with cfg.bodyColor
+  const skinHex = toHex(cfg.skinColor);
+  const bodyHex = toHex(cfg.bodyColor);
+  const hairHex = toHex(cfg.hairColor);
+
   const faceReps = React.useMemo(
-    () => (cfg.skinColor ? ([{ from: "#e8bda7", to: cfg.skinColor }] as const) : ([] as const)),
-    [cfg.skinColor]
+    () => (skinHex ? ([{ from: "#e8bda7", to: skinHex }] as const) : ([] as const)),
+    [skinHex]
   );
   const cloth1Reps = React.useMemo(
-    () => (cfg.skinColor ? ([{ from: "#e8bda7", to: cfg.skinColor }] as const) : ([] as const)),
-    [cfg.skinColor]
+    () => (skinHex ? ([{ from: "#e8bda7", to: skinHex }] as const) : ([] as const)),
+    [skinHex]
   );
   const bodyReps = React.useMemo(
-    () => (cfg.bodyColor ? ([{ from: "#c2272d", to: cfg.bodyColor }] as const) : ([] as const)),
-    [cfg.bodyColor]
+    () => (bodyHex ? ([{ from: "#c2272d", to: bodyHex }] as const) : ([] as const)),
+    [bodyHex]
   );
   const hairReps = React.useMemo(
-    () => (cfg.hairColor ? ([{ from: "#694118", to: cfg.hairColor }] as const) : ([] as const)),
-    [cfg.hairColor]
+    () => (hairHex ? ([{ from: "#694118", to: hairHex }] as const) : ([] as const)),
+    [hairHex]
   );
   const faceUrl = useColorized(urls.face, faceReps);
   const clothing1Url = useColorized(urls.clothing1, cloth1Reps);
@@ -356,7 +361,7 @@ export function Avatar(props: Props) {
           y={imgY}
           width={imgW}
           height={imgH}
-          fill={cfg.bgColor || "transparent"}
+          fill={toHex(cfg.bgColor) || "transparent"}
           shapeRendering="crispEdges"
         />
       )}

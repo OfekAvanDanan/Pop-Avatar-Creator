@@ -294,7 +294,11 @@
 
   .builder-hero {
     height: 100dvw;
-    --arc-top: -190dvw;
+    --arc-top: -192dvw;
+  }
+
+  .builder-preview .avatar {
+    transform: scale(var(--avatar-scale, 0.93)) translateY(17dvw);
   }
 
 
