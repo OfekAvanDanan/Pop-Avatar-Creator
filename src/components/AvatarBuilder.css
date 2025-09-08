@@ -48,7 +48,6 @@
 }
 
 .ofek-logo {
-  position: relative;
   margin-bottom: -40px;
   height: 35px;
   filter:
@@ -57,11 +56,13 @@
 
 
 .builder-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   width: 100%;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 15px;
+  text-align: center;
 
   z-index: 4;
   pointer-events: none;
