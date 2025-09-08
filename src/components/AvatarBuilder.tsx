@@ -20,6 +20,7 @@ import Swatch from "./common/Swatch";
 import Tile from "./common/Tile";
 import { SKIN_COLORS, CLOTH_COLORS, HAIR_COLORS, BG_COLORS } from "../styles/palette";
 import ofekLogo from "../Assets/logo/Logo.svg";
+import Button from "./common/Button";
 
 type Tab = "Face" | "Hair" | "Clothing" | "Details" | "Background";
 
@@ -283,9 +284,7 @@ export default function AvatarBuilder() {
           )}
         </div>
         <div className="save-row">
-          <button className="save-btn" onClick={onSave}>
-            Save Changes
-          </button>
+          <Button onClick={onSave}>Save Changes</Button>
         </div>
       </div>
     </div>

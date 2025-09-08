@@ -213,24 +213,7 @@
   margin-top: var(--space-lg);
 }
 
-.save-btn {
-  background: var(--primary);
-  font-family: var(--fonts);
-  font-weight: var(--font-bold);
-  color: #fff;
-  border: none;
-  font-weight: 800;
-  padding: 12px 20px;
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  transition: var(--u-transition);
-}
-
-.save-btn:hover {
-  transform: var(--transform-shadow);
-  box-shadow: var(--shadow-strong);
-}
+/* button styles moved to common/Button.css */
 
 /* Responsive: full-bleed layout on small screens */
 @media (max-width: 580px) {

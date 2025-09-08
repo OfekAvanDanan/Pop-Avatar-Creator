@@ -47,12 +47,14 @@
   --font-light: 400;
   --font-regular: 700;
   --font-bold: 900;
+  --to-bold: "wght" 900;
 
   /* Shared transition tokens */
   --u-transition: transform var(--t-fast),
     box-shadow var(--t-fast),
     outline-color var(--t-fast),
-    background-color var(--t-fast);
+    background-color var(--t-fast),
+    font-variation-settings var(--t-slow);
 }
 
 /* Transitions & motion */

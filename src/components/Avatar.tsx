@@ -52,7 +52,7 @@ try {
 // Single Body asset
 const bodyUrl = (() => {
   try {
-    const ctx = require.context("../Assets/3_Body", false, /\.\/Body\.svg$/);
+    const ctx = require.context("../Assets/AvatarAssets/3_Body", false, /\.\/Body\.svg$/);
     return ctx("./Body.svg");
   } catch {
     return undefined;
@@ -219,7 +219,9 @@ export function Avatar(props: Props) {
       return url ? `${url}|${JSON.stringify(replacements)}` : undefined;
     }, [url, replacements]);
 
-    const [dataUrl, setDataUrl] = React.useState<string | undefined>(() => (key ? GLOBAL_COLORIZED_CACHE.get(key) : undefined));
+    const [dataUrl, setDataUrl] = React.useState<string | undefined>(() =>
+      key ? GLOBAL_COLORIZED_CACHE.get(key) : undefined
+    );
 
     React.useEffect(() => {
       let cancelled = false;
@@ -337,9 +339,9 @@ export function Avatar(props: Props) {
   // Note on colors: background is supported. Body/skin recoloring is not applied yet because SVGs contain internal styles.
   // If needed, we can enhance later by inlining and overriding fills.
 
-  const cls = ['avatar', className].filter(Boolean).join(' ');
+  const cls = ["avatar", className].filter(Boolean).join(" ");
 
-  const par = cover ? 'xMidYMid slice' : 'xMidYMid meet';
+  const par = cover ? "xMidYMid slice" : "xMidYMid meet";
   const BLEED = 1; // small bleed to avoid subpixel gaps
   const imgX = -BLEED / 2;
   const imgY = -BLEED / 2;
@@ -353,7 +355,7 @@ export function Avatar(props: Props) {
       height={h}
       preserveAspectRatio={par}
       className={cls}
-      style={{ display: 'block', ...style }}
+      style={{ display: "block", ...style }}
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Background color */}

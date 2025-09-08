@@ -1,0 +1,33 @@
+.btn {
+  background: var(--primary);
+  font-family: var(--fonts);
+  font-weight: var(--font-bold);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--u-transition);
+}
+
+.btn:hover {
+  transform: var(--transform-shadow);
+  box-shadow: var(--shadow-strong);
+}
+
+.btn:focus-visible {
+  outline: var(--bd-1) solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Variants */
+.btn-secondary {
+  background: var(--ink);
+  color: var(--panel);
+}
+
+.btn-block {
+  width: 100%;
+}
+
