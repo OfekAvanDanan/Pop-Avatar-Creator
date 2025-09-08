@@ -14,7 +14,7 @@ import {
   glassesCtx,
 } from "../lib/assetContexts";
 import "./AvatarBuilder.css";
-import ColumnPager from "./ColumnPager";
+import ColumnPager from "./common/ColumnPager";
 import Tabs from "./common/Tabs";
 import Swatch from "./common/Swatch";
 import Tile from "./common/Tile";

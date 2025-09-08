@@ -249,16 +249,15 @@
 
   .builder-title {
     width: 80%;
-    transform: translateY(6dvh);
   }
 
   .ofek-logo {
     height: 25px;
-    margin-bottom: -36px;
+    margin-bottom: -40px;
   }
 
   .title-text {
-    font-size: 28pt;
+    font-size: 46pt;
   }
 
   .container-tilesnswatches {
@@ -281,14 +280,24 @@
     height: 100dvh;
   }
 
-  .builder-title {
-    transform: translateY(5dvw);
+  .ofek-logo {
+    height: 25px;
+    margin-bottom: -25px;
+  }
+
+
+
+  .title-text {
+    font-size: 36pt;
+    line-height: 0.75;
   }
 
   .builder-hero {
     height: 100dvw;
     --arc-top: -190dvw;
   }
+
+
 }
 
 /* Smallest phones (≤426px) — only actual changes */
@@ -299,8 +308,10 @@
     --arc-top: -180dvw;
   }
 
-  .builder-title {
-    transform: translateY(0dvw);
+
+
+  .title-text {
+    font-size: 28pt;
   }
 
 
