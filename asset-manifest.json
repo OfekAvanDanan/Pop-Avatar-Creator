@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Pop-Avatar-Creator/static/css/main.00b9ad2f.css",
+    "main.css": "/Pop-Avatar-Creator/static/css/main.42629800.css",
     "main.js": "/Pop-Avatar-Creator/static/js/main.d86d70e3.js",
     "static/js/453.b7b2e9a2.chunk.js": "/Pop-Avatar-Creator/static/js/453.b7b2e9a2.chunk.js",
     "static/media/AvatarCreator.svg": "/Pop-Avatar-Creator/static/media/AvatarCreator.ff6ce00c6fbc1016959ebe5244f28e9e.svg",
@@ -54,12 +54,12 @@
     "static/media/Hair_002_0.svg": "/Pop-Avatar-Creator/static/media/Hair_002_0.f80b9e525e0753b3559e.svg",
     "static/media/Hair_105_0.svg": "/Pop-Avatar-Creator/static/media/Hair_105_0.cdf9222a74865af4748a.svg",
     "static/media/CenterClothing_2.svg": "/Pop-Avatar-Creator/static/media/CenterClothing_2.00fcb771385c6def00bf.svg",
-    "main.00b9ad2f.css.map": "/Pop-Avatar-Creator/static/css/main.00b9ad2f.css.map",
+    "main.42629800.css.map": "/Pop-Avatar-Creator/static/css/main.42629800.css.map",
     "main.d86d70e3.js.map": "/Pop-Avatar-Creator/static/js/main.d86d70e3.js.map",
     "453.b7b2e9a2.chunk.js.map": "/Pop-Avatar-Creator/static/js/453.b7b2e9a2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.00b9ad2f.css",
+    "static/css/main.42629800.css",
     "static/js/main.d86d70e3.js"
   ]
 }
