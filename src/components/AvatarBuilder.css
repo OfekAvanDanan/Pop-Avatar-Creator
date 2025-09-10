@@ -17,7 +17,7 @@
 
 .builder-hero {
   position: relative;
-  height: 420px;
+  height: 415px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,9 +26,9 @@
   background: var(--panel);
   /* outside the arc */
   /* Arc geometry (shared by fill, outline and clipping) */
-  --arc-radius: 70%;
+  --arc-radius: 100%;
   /* half of width -> 140% circle width */
-  --arc-top: -42%;
+  --arc-top: -103.5%;
   /* move circle up to create a smile */
   --arc-center-y: calc(var(--arc-radius) + var(--arc-top));
 }
@@ -82,7 +82,7 @@
   /* above the fill */
   /* Clip avatar to the same smiling circle */
   clip-path: circle(var(--arc-radius) at 50% var(--arc-center-y));
-  transform: translateY(2px);
+  transform: translateY(8px);
   /* raise slightly so avatar stays inside */
 }
 
@@ -221,6 +221,7 @@
   .App {
     /* keep only once at the widest mobile breakpoint */
     padding: 0 !important;
+
   }
 
   .builder-root {
@@ -231,13 +232,14 @@
     border-radius: 0;
     box-shadow: none;
     overflow-y: scroll;
+    display: flex;
   }
 
   .builder-hero {
-    height: 150dvw;
+    height: 100dvw;
     aspect-ratio: 1 / 1;
     --arc-radius: 145dvw;
-    --arc-top: -187dvw;
+    --arc-top: -190dvw;
     overflow: visible;
   }
 
@@ -271,29 +273,6 @@
   }
 }
 
-/* Narrower phones (≤440px) — only actual changes from the 560px block */
-@media (max-width: 400px) {
-  .builder-root {
-    height: 100dvh;
-  }
-
-
-  .title-text {
-    font-size: 36pt;
-    line-height: 0.75;
-  }
-
-  .builder-hero {
-    height: 100dvw;
-    --arc-top: -192dvw;
-  }
-
-  .builder-preview .avatar {
-    transform: scale(var(--avatar-scale, 0.93)) translateY(17dvw);
-  }
-
-
-}
 
 /* Smallest phones (≤426px) — only actual changes */
 @media (max-width: 325px) {
