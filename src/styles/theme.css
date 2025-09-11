@@ -1,6 +1,5 @@
 :root {
   --bg: #F2E0E9;
-  ;
   --panel: #FAEFF4;
   --ink: #16070E;
   --ink-weak: #16070e20;
@@ -57,13 +56,6 @@
     font-variation-settings var(--t-slow);
 }
 
-/* Transitions & motion */
-.u-transition {
-  transition: var(--u-transition);
-}
-
-
-
 .title-text {
   line-height: 0.85;
   font-weight: 400;
@@ -86,81 +78,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .u-transition {
-    transition: none;
-  }
-
   * {
     animation: none !important;
   }
 }
 
-/* Utilities: radius */
-.u-r-sm {
-  border-radius: var(--r-sm);
-}
-
-.u-r-md {
-  border-radius: var(--r-md);
-}
-
-.u-r-lg {
-  border-radius: var(--r-lg);
-}
-
-/* Utilities: shadows */
-.u-shadow-1 {
-  box-shadow: var(--shadow);
-}
-
-.u-shadow-2 {
-  box-shadow: var(--shadow-strong);
-}
-
-/* Utilities: borders */
-.u-border-1 {
-  border: var(--bd-1) solid var(--outline);
-}
-
-.u-border-2 {
-  border: var(--bd-2) solid var(--outline);
-}
-
-/* Utilities: colors */
-.u-bg-panel {
-  background: var(--panel);
-}
-
-.u-bg-tile {
-  background: var(--tile-bg);
-}
-
-.u-ink {
-  color: var(--ink);
-}
-
-.u-primary-bg {
-  background: var(--primary);
-}
-
-.u-primary {
-  color: var(--primary);
-}
-
-/* Utilities: layout spacing */
-.u-flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.u-gap-sm {
-  gap: var(--space-sm);
-}
-
-.u-gap {
-  gap: var(--space);
-}
-
-.u-gap-lg {
-  gap: var(--space-lg);
-}
+/* Removed unused utility classes to keep theme minimal */
