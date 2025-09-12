@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "./Avatar";
-import { buildAvatarString, AvatarConfig } from "../lib/avatar";
+import { buildAvatarString, AvatarConfig, parseAvatarString } from "../lib/avatar";
 import {
   faceCtx,
   hair0Ctx,
@@ -60,10 +60,57 @@ export default function AvatarBuilder() {
     glasses: 0,
   });
 
+  // Change log state and helpers
+  const [logs, setLogs] = React.useState<string[]>([]);
+  const log = React.useCallback((msg: string) => {
+    const stamped = `${new Date().toLocaleTimeString()} — ${msg}`;
+    // eslint-disable-next-line no-console
+    console.log(stamped);
+    setLogs((xs) => [stamped, ...xs].slice(0, 200));
+  }, []);
+
+  type Key = keyof AvatarConfig;
+  const keys: Key[] = [
+    "bgColor",
+    "bodyColor",
+    "skinColor",
+    "hairColor",
+    "faceType",
+    "hairType",
+    "clothingType",
+    "faceTexture",
+    "centerClothing",
+    "rightClothing",
+    "leftClothing",
+    "eyes",
+    "nose",
+    "mouth",
+    "glasses",
+  ];
+
+  const applyUpdate = React.useCallback(
+    (updater: (prev: AvatarConfig) => AvatarConfig, reason?: string) => {
+      setCfg((prev) => {
+        const next = updater(prev);
+        const changed: string[] = [];
+        for (const k of keys) {
+          const a = prev[k];
+          const b = next[k];
+          if (a !== b) changed.push(`${String(k)}: ${a ?? ""} -> ${b ?? ""}`);
+        }
+        if (changed.length) {
+          log(`${reason ? reason + " — " : ""}${changed.join(", ")}`);
+        }
+        return next;
+      });
+    },
+    [log]
+  );
+
   const onSave = () => {
     const s = buildAvatarString(cfg);
-    // Build a ready-to-paste variable snippet
-    const snippet = `const AVATAR_STRING = "${s}";`;
+    // Save/copy only the raw string
+    const snippet = s;
     // Expose on window for quick access during the session
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -95,9 +142,31 @@ export default function AvatarBuilder() {
 
   // Helpers to set/toggle numeric options
   const setNumeric = <K extends keyof AvatarConfig>(key: K, value: number) =>
-    setCfg((x) => ({ ...x, [key]: value } as AvatarConfig));
+    applyUpdate((x) => ({ ...x, [key]: value } as AvatarConfig), `Set ${String(key)}`);
   const toggleNumeric = <K extends keyof AvatarConfig>(key: K, value: number) =>
-    setCfg((x) => ({ ...x, [key]: (x[key] as unknown as number) === value ? 0 : value } as AvatarConfig));
+    applyUpdate(
+      (x) => ({ ...x, [key]: (x[key] as unknown as number) === value ? 0 : value } as AvatarConfig),
+      `Toggle ${String(key)} ${value}`
+    );
+
+  const onImportPreset = () => {
+    const input = window.prompt("Paste avatar string (CSV) or JSON AvatarConfig:");
+    if (!input) return;
+    try {
+      let patch: AvatarConfig | null = null;
+      if (input.trim().startsWith("{")) {
+        patch = JSON.parse(input) as AvatarConfig;
+      } else {
+        patch = parseAvatarString(input);
+      }
+      if (patch) {
+        applyUpdate((prev) => ({ ...prev, ...patch }), "Import preset");
+        alert("Imported preset successfully");
+      }
+    } catch (e) {
+      alert("Failed to import preset: " + (e as Error).message);
+    }
+  };
 
   return (
     <div className="builder-root">
@@ -134,17 +203,13 @@ export default function AvatarBuilder() {
                     key={c}
                     color={toHex(c) as string}
                     selected={(toHex(cfg.skinColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
-                    onClick={() => setCfg((x) => ({ ...x, skinColor: c }))}
+                    onClick={() => applyUpdate((x) => ({ ...x, skinColor: c }))}
                   />
                 ))}
               </div>
               <ColumnPager>
                 {faceOptions.map((n) => (
-                  <Tile
-                    key={`face-${n}`}
-                    selected={cfg.faceType === n}
-                    onClick={() => setCfg((x) => ({ ...x, faceType: n }))}
-                  >
+                  <Tile key={`face-${n}`} selected={cfg.faceType === n} onClick={() => setNumeric("faceType", n)}>
                     <Avatar config={{ ...cfg, faceType: n }} width="100%" height="100%" />
                   </Tile>
                 ))}
@@ -161,7 +226,7 @@ export default function AvatarBuilder() {
                     color={toHex(c) as string}
                     selected={(toHex(cfg.hairColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
                     onClick={() =>
-                      setCfg((prev) => {
+                      applyUpdate((prev) => {
                         const selectedHex = (toHex(c) || "").toLowerCase();
                         const currentBgHex = (toHex(prev.bgColor) || "").toLowerCase();
                         const bodyHex = (toHex(prev.bodyColor) || "").toLowerCase();
@@ -177,7 +242,7 @@ export default function AvatarBuilder() {
                           }
                         }
                         return { ...prev, hairColor: c, bgColor: nextBg };
-                      })
+                      }, "Set hairColor")
                     }
                   />
                 ))}
@@ -221,7 +286,7 @@ export default function AvatarBuilder() {
                     color={toHex(c) as string}
                     selected={(toHex(cfg.bodyColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
                     onClick={() =>
-                      setCfg((prev) => {
+                      applyUpdate((prev) => {
                         const selectedHex = (toHex(c) || "").toLowerCase();
                         const currentBgHex = (toHex(prev.bgColor) || "").toLowerCase();
                         const hairHex = (toHex(prev.hairColor) || "").toLowerCase();
@@ -237,7 +302,7 @@ export default function AvatarBuilder() {
                           }
                         }
                         return { ...prev, bodyColor: c, bgColor: nextBg };
-                      })
+                      }, "Set bodyColor")
                     }
                   />
                 ))}
@@ -247,7 +312,7 @@ export default function AvatarBuilder() {
                   <Tile
                     key={`cloth-${n}`}
                     selected={cfg.clothingType === n}
-                    onClick={() => setCfg((x) => ({ ...x, clothingType: n }))}
+                    onClick={() => setNumeric("clothingType", n)}
                   >
                     <Avatar config={{ ...cfg, clothingType: n }} width="100%" height="100%" />
                   </Tile>
@@ -318,7 +383,7 @@ export default function AvatarBuilder() {
                 <Tile
                   key={`bg-${c}`}
                   selected={(toHex(cfg.bgColor) || "").toLowerCase() === (toHex(c) || "").toLowerCase()}
-                  onClick={() => setCfg((x) => ({ ...x, bgColor: c }))}
+                  onClick={() => applyUpdate((x) => ({ ...x, bgColor: c }), "Set bgColor")}
                 >
                   <Avatar config={{ ...cfg, bgColor: c }} width="100%" height="100%" />
                 </Tile>
@@ -326,9 +391,14 @@ export default function AvatarBuilder() {
             </ColumnPager>
           )}
         </div>
-        <div className="save-row">
+        <div className="save-row" style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <Button onClick={onSave}>Save Changes</Button>
+          <Button variant="secondary" onClick={onImportPreset}>
+            Import Preset
+          </Button>
         </div>
+
+        {/* current code box removed per request */}
       </div>
     </div>
   );
